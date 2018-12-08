@@ -8,18 +8,17 @@
 </head>
 
 <body>
-    <header>
-        <img src="images/rocket_icon.png" alt="A rocket, site icon">
-        <h1>Very Cool Forum Name</h1>
-    </header>
-
-    <form action="login.php" method="POST">
+   
+    <form action="../pages/register.php" method="POST">
         <div class="signup">
             <input type="text" name="username" required="required">Username
             <input type="text" name="password" required="required">Password
             <input type="submit" value="Sign Up">
         </div>
+      
     </form>
+    
+ 
 </body>
 
 </html>

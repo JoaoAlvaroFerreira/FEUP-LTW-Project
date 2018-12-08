@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS Comments;
 DROP TABLE IF EXISTS Votes;
 
 CREATE TABLE Users (
-    username VARCHAR NOT NULL PRIMARY KEY,
-    passw VARCHAR NOT NULL,
+    username VARCHAR PRIMARY KEY,
+    passw VARCHAR,
     dataRegistered DATE
 );
 
