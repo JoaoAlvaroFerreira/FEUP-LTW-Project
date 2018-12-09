@@ -10,8 +10,8 @@ CREATE TABLE posts
     postID INTEGER UNIQUE NOT NULL PRIMARY KEY,
     title VARCHAR NOT NULL,
     content VARCHAR,
-    link VARCHAR,
-    image VARCHAR,
+    type VARCHAR,
+    votes INTEGER,
     dateWritten DATETIME,
     username INTEGER REFERENCES users Not NULL
 );
@@ -20,6 +20,7 @@ CREATE TABLE comments
 (
     commentID INTEGER UNIQUE NOT NULL PRIMARY KEY,
     content TEXT,
+    votes INTEGER,
     dateWritten DATETIME NOT NULL,
     postID INTEGER REFERENCES posts Not NULL
 );
