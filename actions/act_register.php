@@ -1,0 +1,20 @@
+<?php
+  include_once('../database/db_user.php');
+  include_once ('../database/session.php');
+  
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+ 
+  try{
+      if(insertUser($username,$password)){
+    $_SESSION['username'] = $username;
+    $_SESSION['message'] = 'Signed up and logged in!';
+      }
+      else $_SESSION['message'] = 'That password and/or username are already taken!';
+  }catch (PDOException $e) {
+   $_SESSION['message'] = 'Issues with database';
+
+  }
+
+header('Location: ../pages/frontpage.php');
+?>
