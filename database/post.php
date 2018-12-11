@@ -42,7 +42,7 @@ class Post {
     
 
 } 
-class Comment extends Post {
+/*class Comment extends Post {
 
    $commentId;
    $commentDate;
@@ -54,6 +54,6 @@ class Comment extends Post {
        $this->commentDate = date('Y-m-d H:i:s');
    }
 
-}
+}*/
 
 ?>

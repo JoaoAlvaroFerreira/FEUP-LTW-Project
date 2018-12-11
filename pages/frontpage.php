@@ -7,6 +7,7 @@ include_once "../database/session.php";
 
 draw_header();
 draw_content();
+draw_footer();
 
 
 ?>
