@@ -7,7 +7,7 @@ CREATE TABLE users (
 
 CREATE TABLE posts
 (
-    postID INTEGER PRIMARY KEY,
+    postID INTEGER UNIQUE NOT NULL PRIMARY KEY,
     title VARCHAR NOT NULL,
     content VARCHAR,
     type VARCHAR,
@@ -19,7 +19,6 @@ CREATE TABLE comments
 (
     commentID INTEGER UNIQUE NOT NULL PRIMARY KEY,
     content TEXT,
-    votes INTEGER,
     dateWritten DATETIME NOT NULL,
     postID INTEGER REFERENCES posts Not NULL
 );

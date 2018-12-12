@@ -4,6 +4,6 @@
 
   insertPost();
 
-//header('Location: ../pages/frontpage.php');
+
 include_once('../database/test.php');
 ?>

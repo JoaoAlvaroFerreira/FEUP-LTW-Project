@@ -1,8 +1,11 @@
 <?php
   include_once('../database/db_user.php');
   include_once ('../database/session.php');
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  
+
+
+$username = htmlspecialchars($_POST['username']);
+$password = htmlspecialchars($_POST['password']);
  
   if (checkPassword($username, $password)) {
     $_SESSION['username'] = $username;

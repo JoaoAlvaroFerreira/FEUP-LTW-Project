@@ -20,7 +20,8 @@ foreach ($result as $row) {
     echo $row['postID'], "|";
     echo $row['title'], "|";
     echo $row['content'], "|";
-    echo $row['type'], "|";
+    echo $row['link'], "|";
+    echo $row['image'], "|";
     echo $row['dateWritten'], "|";
     echo $row['username'], "<br>";
 }

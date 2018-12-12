@@ -41,7 +41,9 @@
     ?>
    
     </nav>
-
+</body>
+    
+</html>
 
 <?php } ?>
     
@@ -50,10 +52,9 @@
 ?>
  <nav id="sort">
         <ul>
-            <!--<li>top</li>
-            <li>hot</li>-->
+            <li>hot</li>
             <li>new</li>
-            
+            <li>top</li>
         </ul>
      
      
@@ -64,10 +65,4 @@
         echo '<h4><a href="../pages/makepost.php">Make your own post</a></h4>';
      }
                               } ?>
-
-<?php function draw_footer() { 
-?>
-  </body>
-</html>
-<?php } ?>
 
