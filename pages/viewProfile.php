@@ -4,10 +4,12 @@ include_once "../database/init.php";
 include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
+include_once "../templates/profile.php";
 
 draw_header();
-//draw_userinfo();
-//draw_userposts();
+$username = $_GET['username'];
+draw_user_info($username);
+draw_user_posts($username);
 
 
 ?>

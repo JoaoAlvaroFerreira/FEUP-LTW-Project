@@ -36,8 +36,7 @@
   <section id="logout">
     
     <h3><?php echo "Bem vindo " . $_SESSION['username'] . "." ?></h3>
-
-   <a href = "../pages/profile.php"> Perfil</a>
+ <?php     echo '<a href = "../pages/viewProfile.php?username='.$_SESSION['username'].'">'. "Perfil" . '</a>';?>
     <a href = "../actions/act_log_out.php"> Log Out</a>
       
    
