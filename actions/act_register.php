@@ -5,6 +5,7 @@
 
 $username = htmlspecialchars($_POST['username']);
 $password = htmlspecialchars($_POST['password']);
+$email = htmlspecialchars($_POST['email']);
 
   try{
       if(insertUser($username,$password, $email)){

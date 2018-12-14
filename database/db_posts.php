@@ -1,17 +1,21 @@
 <?php
   include_once('init.php');
 
-  function insertPost() {
-    $date = date('Y-m-d H:i:s');
+  function insertPost($title, $type, $content, $username) {
     $db = Database::getInstance()->db();
-    $title = $_POST['title'];
     $date = date('Y-m-d H:i:s');
-    $username= $_SESSION['username'];
-    $content = $_POST['content'];
-    $stmt = $db->prepare('INSERT INTO posts VALUES(NULL,?, ?, NULL, ?, ?)');
-    $stmt->execute(array($title,$content,$date,$username));
-    include_once('test.php');
+    $stmt = $db->prepare('INSERT INTO posts VALUES(NULL,?, ?, ?, ?, ?)');
+    $stmt->execute(array($title,$content,$type,$date,$username));
       
     return true;
   }
+
+    function insertComment($content,$postID, $username, $fatherID) {
+    $db = Database::getInstance()->db();
+    $date = date('Y-m-d H:i:s');
+    $stmt = $db->prepare('INSERT INTO comments VALUES(NULL,?, ?, ?, ?, ?)');
+    $stmt->execute(array($content,$date,$postID,$username,$fatherID));
+
+    return true;
+    }
 ?>

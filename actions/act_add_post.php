@@ -2,8 +2,15 @@
   include_once('../database/db_posts.php');
   include_once ('../database/session.php');
 
-  insertPost();
+
+$title = htmlspecialchars($_POST['title']);
+$type = htmlspecialchars($_POST['type']);
+$content = htmlspecialchars($_POST['content']);
+$username = $_SESSION['username'];
+insertPost($title,$type,$content, $username);
 
 
-include_once('../database/test.php');
+
+
+header('Location: ../pages/frontpage.php');
 ?>

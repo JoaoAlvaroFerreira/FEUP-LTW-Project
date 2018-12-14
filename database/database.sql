@@ -26,18 +26,18 @@ CREATE TABLE posts
 
 CREATE TABLE comments
 (
-    commentID INTEGER NOT NULL,
+    commentID INTEGER UNIQUE NOT NULL PRIMARY KEY,
     content TEXT,
     dateWritten DATETIME NOT NULL,
     postID INTEGER REFERENCES posts Not NULL,
     username INTEGER REFERENCES users Not NULL,
-    PRIMARY KEY(postID, commentID, username)
+    fatherID INTEGER
 );
 
 CREATE TABLE commentvotes
 (
     
-    postID INTEGER UNIQUE NOT NULL REFERENCES posts,
+    postID INTEGER NOT NULL REFERENCES posts,
     commentID INTEGER UNIQUE NOT NULL REFERENCES comments,
     username VARCHAR NOT NULL REFERENCES users,
     positive INTEGER,

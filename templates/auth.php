@@ -23,6 +23,7 @@
     <form method="post" action="../actions/act_register.php">
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
+       <input type="text" name="email" placeholder="email" required>
       <input type="submit" value="Register">
       <input type="reset">
     </form>

@@ -10,8 +10,8 @@
     return $user !== false && password_verify($password, $user['passw']);
   }
 
-  function insertUser($username, $password) {
-    $date = date('Y-m-d H:i:s');
+  function insertUser($username, $password, $email) {
+    $date = date('Y-m-d');
     $db = Database::getInstance()->db();
       
       $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
@@ -21,8 +21,8 @@
         return false;
       
    $options = ['cost' => 12];
-    $stmt = $db->prepare('INSERT INTO users VALUES(?, ?, ?)');
-    $stmt->execute(array($username, password_hash($password, PASSWORD_DEFAULT, $options),$date));
+    $stmt = $db->prepare('INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($username, password_hash($password, PASSWORD_DEFAULT, $options), null,$email,null,null,$date));
       
       return true;
   }

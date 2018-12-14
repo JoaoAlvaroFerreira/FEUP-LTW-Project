@@ -15,21 +15,21 @@ draw_header();
 
 <html>
     
-    <form action="../actions/act_add_post.php" method="post">
-  Title: <input type="text" name="title"><br>
-          <input type="text" name="content" placeholder="Add item">
-          <input type="submit" value="Post">  
-  <!--<input type="radio" name="type" value="Link"> Link
-  <input type="radio" name="type" value="Image"> Image
-  <input type="radio" name="type" value="Text"> Text-->
+    <form action="../actions/act_add_post.php" method="post" id="userpost">
+  Title: <input type="text" name="title" placeholder="Give your post a title"><br>
+         
+  <input type="radio" name="type" value="link"> Link
+  <input type="radio" name="type" value="img"> Image
+  <input type="radio" name="type" value="text" checked="checked"> Text
+        <br>
   
-        
+         <textarea name="content" placeholder="Write your post or paste your url here" form="userpost" rows="20" cols="100"></textarea> <br>
+      <input type="submit" value="Submit" form="userpost">
+      <input type="reset" form="userpost">
 
 </form>
-    
-    <!--<textarea name="comment" placeholder="Write your post or paste your url here" form="post" rows="20" cols="100"></textarea> <br>
-      <input type="submit" value="Submit" form="post">
-      <input type="reset" form="post">-->
+</html>
+   
     
 <?php
     

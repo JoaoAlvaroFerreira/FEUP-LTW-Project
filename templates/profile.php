@@ -18,11 +18,7 @@ function draw_user_info($username){
     if(empty($result['dataRegistered']))
         echo "This user chose to not disclose his date of registration.";
     else
-        echo "<p>Registed since: ".$result['dataRegistered']."</p>";
-    
-    
-    
-    
+        echo "<p>Registed since: ".$result['dataRegistered']."</p>";   
  
     
 }
