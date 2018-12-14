@@ -7,7 +7,7 @@ $username = htmlspecialchars($_POST['username']);
 $password = htmlspecialchars($_POST['password']);
 
   try{
-      if(insertUser($username,$password)){
+      if(insertUser($username,$password, $email)){
     $_SESSION['username'] = $username;
     $_SESSION['message'] = 'Signed up and logged in!';
       }
