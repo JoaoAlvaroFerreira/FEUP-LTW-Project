@@ -1,4 +1,7 @@
-<?php function draw_header() { 
+<?php
+    include_once "../templates/auth.php";
+?>
+<?php function draw_header() {
 ?>
 <!DOCTYPE html>
 
@@ -25,16 +28,16 @@
         </ul>
     </nav>
     </header>
+    <?php if (isset($_SESSION['message'])) {
+        $message=$_SESSION['message'];
+        ?>
+        <section id="messages">
+            <?=$message?>
+        </section>
+    <?php unset($_SESSION['message']); } ?>
 
 <?php 
-                                       
-    include_once "../templates/auth.php";
- 
-    if (isset($_SESSION['message'])){
-        
-        echo $_SESSION['message'];
-    }
-                                                 
+                                            
                                        
    if (!isset($_SESSION['username'])){
         

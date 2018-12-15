@@ -9,6 +9,10 @@ $result = $stmt->fetchAll();
 foreach ($result as $row) {
     echo $row['username'], "|";
     echo $row['passw'], "|";
+    echo $row['profileimg'], "|";
+    echo $row['email'], "|";
+    echo $row['description'], "|";
+    echo $row['dateofbirth'], "|";
     echo $row['dataRegistered'], "<br>";
 }
 
@@ -20,8 +24,7 @@ foreach ($result as $row) {
     echo $row['postID'], "|";
     echo $row['title'], "|";
     echo $row['content'], "|";
-    echo $row['link'], "|";
-    echo $row['image'], "|";
+    echo $row['type'], "|";
     echo $row['dateWritten'], "|";
     echo $row['username'], "<br>";
 }
@@ -34,10 +37,12 @@ foreach ($result as $row) {
     echo $row['commentID'], "|";
     echo $row['content'], "|";
     echo $row['dateWritten'], "|";
-    echo $row['postID'], "<br>";
+    echo $row['postID'], "|";
+    echo $row['username'], "|";
+    echo $row['fatherID'], "<br>";
 }
 
-echo "<br><br>";
+/*echo "<br><br>";
 $stmt = $dbh->prepare('SELECT * FROM votes');
 $stmt->execute();
 $result = $stmt->fetchAll();
@@ -46,5 +51,5 @@ foreach ($result as $row) {
     echo $row['username'], "|";
     echo $row['positive'], "<br>";
 }
-
+*/
 ?>
