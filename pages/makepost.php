@@ -11,9 +11,7 @@ draw_header();
 
 ?>
 
-<!DOCTYPE HTML>
 
-<html>
     <section id = "postform">
     <form action="../actions/act_add_post.php" method="post" id="userpost">
   Title: <input type="text" name="title" placeholder="Give your post a title"><br>
@@ -31,12 +29,11 @@ draw_header();
 </form>
         
     </section>
-</html>
    
     
 <?php
     
-    
+    draw_footer();
 
     ?>
     

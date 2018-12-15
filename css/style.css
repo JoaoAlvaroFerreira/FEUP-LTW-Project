@@ -1,0 +1,51 @@
+body{
+
+    --bg-color:#ADD8E6;
+
+    background-color: var(--bg-color);
+}
+
+div#banner{
+    border-bottom: 0.25em solid black;
+}
+
+nav#menu > ul{
+    float: left;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
+    
+    list-style-type:none;
+}
+
+#menu > ul > li{
+    background: red;
+    padding: 0.25em;
+}
+
+#menu > ul > li:nth-child(odd){
+    background: blue;
+    padding: 0.25em;
+}
+
+
+
+.user_options{
+    display: grid;
+    /* grid-template-rows: 20% auto;
+    grid-template-columns: auto 10% 10%; */
+}
+
+.user_options #login{
+    float: right;
+
+    background: blue;
+    padding: 1em;
+}
+
+.user_options #register{
+    float: right;
+
+    background: red;
+    padding: 1em;
+}

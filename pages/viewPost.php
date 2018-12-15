@@ -12,4 +12,5 @@ $id = $_GET['id'];
 draw_post($id);
 
 draw_comments($id, 0,0);
+draw_footer();
 ?>
