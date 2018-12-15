@@ -11,6 +11,7 @@ draw_header();
 draw_content();
 draw_posts();
 
+
 function draw_posts(){
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM posts');
@@ -25,6 +26,8 @@ function draw_posts(){
 }
     
 }
+
+
 
 
 ?>

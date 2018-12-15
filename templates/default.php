@@ -6,14 +6,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Very Cool Forum Name</title>
+    <title>RocketBoost</title>
     <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <a href="../pages/frontpage.php"><img src="images/rocket_icon.png" alt="A rocket, site icon"></a>
-        <h1 id="forumTitle">Very Cool Forum Name</h1>
+        <h1 id="forumTitle">RocketBoost</h1>
     </header>
     
     

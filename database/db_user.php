@@ -14,8 +14,8 @@
     $date = date('Y-m-d');
     $db = Database::getInstance()->db();
       
-      $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
-    $stmt->execute(array($username));
+      $stmt = $db->prepare('SELECT * FROM users WHERE username = ? OR email = ?');
+    $stmt->execute(array($username, $email));
       
       if($stmt->fetch())
         return false;
