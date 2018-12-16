@@ -10,6 +10,6 @@ draw_header();
 $username = $_GET['username'];
 draw_user_info($username);
 draw_user_posts($username);
-
+draw_footer();
 
 ?>
