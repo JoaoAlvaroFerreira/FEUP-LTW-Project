@@ -30,9 +30,8 @@
         <li>
             <a href="#">Stories</a>
             <ul>
-                <li><a href="../pages/frontpage.php">Sort by Votes</a></li>
-                <li><a href="../pages/frontpage.php">Sort by New</a></li>
-                <li><a href="../pages/frontpage.php">Sort by Channel</a></li>
+                <li><a href="../pages/frontpage.php?sort=votes">Sort by Votes</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Sort by New</a></li>
             </ul>
         </li>
         <li>

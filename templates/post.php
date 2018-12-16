@@ -17,30 +17,40 @@ function draw_post($id){
     $votes = getVotesPost($id);
     
         
-    if($result['type'] == "text"){
-    echo "<h2>".$votes." | ".$result['title']."</h2>";
-    echo $result['content'].'<br>';
+    if($result['type'] == "text"){ ?>
+    <div id = "posttitle">
+        <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
+<div id = "postcontent"><?php echo $result['content'];?></div>
+<br>
+<?php
     }
     
-    else if($result['type'] == "img"){
-    echo "<h2>".$votes." | ".$result['title']."</h2>";
-    echo '<img src='.$result['content'].' alt="'.$result['title'].'"><br>';
-    }
+    else if($result['type'] == "img"){ ?>
+   <h2><?php echo $votes." | ".$result['title'];  ?></h2>
+    <img src="<?php echo $result['content'] ?>"><br>
+   <?php }
         
-    else if($result['type'] == "link")
-    echo "<h2>".$votes." | <a href=".$result['content'].">".$result['title']."</a></h2>";
+    else if($result['type'] == "link"){?>
+<div id = "posttitle">  <h2><?php echo $votes; ?> | <a href="<?php echo $result['content'];?>"><?php echo $result['title'] ?></a></h2></div>
+<?php
+                                      }
     
-     else if($result['type'] == "video"){
-         echo "<h2>".$votes." | ".$result['title']."</h2>";
+     else if($result['type'] == "video"){?>
+        <div id = "posttitle">
+        <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
+        
+<?php //não tocar nisto, é para ler videos de youtube
          $url = $result['content'];
          parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars);
          $str = $array_of_vars['v'];
          draw_video($str);
+
      }
+    ?>
         
-    echo '<br>Post by <a href = "../pages/viewProfile.php?username='.$result['username'].'">'. $result['username'] .'</a> on '.$result['dateWritten'];
+<div id = "postfootnote"><br>Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>"><?php echo $result['username'];?></a> on <?php echo $result['dateWritten'];?></div>
     
-    if(isset($_SESSION['username']))
+   <?php if(isset($_SESSION['username']))
        post_reply_box($id);
 
 }
@@ -82,9 +92,9 @@ function draw_comments($postID, $fatherID, $level){
     echo "______";
       }
         $votes = getVotesComment($row['postID'],$row['commentID']);
-        echo $votes. " | ";
-        echo $fatherID. " | ";
-        echo $row['content']."<br>";
+        
+        echo "<div id = 'comment'> ".$votes. " | ";
+        echo $row['content']."</div><br>";
         
       
         echo "Written by ".$row['username']." on " .$row['dateWritten'].".";
