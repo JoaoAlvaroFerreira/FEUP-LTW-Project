@@ -124,9 +124,6 @@ function getVotesComment($idpost, $idcomment){
 //Isto é a API do YouTube
 function draw_video($video){?> 
 
-<!DOCTYPE html>
-<html>
-  <body>
   <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
 
@@ -172,17 +169,10 @@ function draw_video($video){?>
         player.stopVideo();
       }
     </script>
-      
-</body>
-</html>
-
-
 <?php }
 
  function post_reply_box($postID) { 
 ?>
-<!DOCTYPE HTML>
-<html>
   <section id="postreply">
     
 
@@ -199,13 +189,11 @@ function draw_video($video){?>
 
 
   </section>
-</html>
 
 <?php } 
 
  function comment_reply_box($postID, $fatherID) { 
 ?>
-<html>
   <section id="commentreply">
     
 
@@ -224,7 +212,6 @@ function draw_video($video){?>
 
 
   </section>
-</html>
 <?php }  
 
 ?>

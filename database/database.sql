@@ -36,12 +36,10 @@ CREATE TABLE comments
 
 CREATE TABLE commentvotes
 (
-    
-    postID INTEGER NOT NULL REFERENCES posts,
     commentID INTEGER UNIQUE NOT NULL REFERENCES comments,
     username VARCHAR NOT NULL REFERENCES users,
     positive INTEGER,
-    PRIMARY KEY(postID, commentID,username)
+    PRIMARY KEY(commentID,username)
 );
 
 CREATE TABLE postvotes

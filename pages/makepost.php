@@ -6,7 +6,7 @@ include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
 
-draw_header();
+//draw_header();
 
 
 ?>
@@ -33,7 +33,7 @@ draw_header();
     
 <?php
     
-    draw_footer();
+    //draw_footer();
 
     ?>
     
