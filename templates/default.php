@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
    
     <header id="logo_tabmenu">
         <div id="logo_title">
@@ -24,6 +25,11 @@
         
  
         <nav class="nav">
+=======
+    <header id="logo_tabmenu">       
+    <div><a href="../pages/frontpage.php"><img src="images/real_logo.png" alt="A rocket, site icon"></a></div>
+    <nav class="nav">
+>>>>>>> so quero fazer pull
     <ul>
         <li>
             <a href="#">About</a></li>
@@ -82,7 +88,7 @@
 
     if (isset($_SESSION['username'])){ ?>
         
-       <div id="floating_menu"><h5>Hello <?php echo $_SESSION['username']?> !</h5>
+       <div id="floating_menu"><h5>Hello <?php echo $_SESSION['username']?>!</h5>
            <a href="../pages/makepost.php">Make your own post</a></div>
    <?php }
 }

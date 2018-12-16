@@ -211,28 +211,34 @@ input[type=text], input[type=password] {
 }
 
 #postlist{
-background-color: #fafafa;
-  border: 2px solid #783F8E;
-  width: 90%;
-  padding: 15px;
+    /* display: inline; */
+    background-color: white;
+    border: 2px solid var(--dark-color);
+    width: 90%;
+    padding: 15px;
     margin: auto;
     
 font-size: 18px;
  
 }
 
+#postlist a:hover, #floating_menu a:hover{
+    text-decoration: underline;
+}
+
 #floating_menu{
-    background-color: red;
-  border: 2px solid black;
-  
-  
+    background-color: var(--main-color);
+    border: 0.5px solid black;
+ 
     margin: auto;
     padding: 10px;;
     width: 130px;
-    z-index: 2;
+    /* z-index: 2; */
     position: fixed;
-    bottom: 40px;
-    right: 40px;
-    
+    top: 40px;
+    right: 40px;   
 }
 
+#floating_menu a:link{
+    color: #595959;
+}

@@ -23,22 +23,29 @@ function draw_post($id){
     <button type="button">Downvote</button> <?php
     if($result['type'] == "text"){ ?>
     <div id = "posttitle">
+<<<<<<< HEAD
         
         <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
 <div id = "postcontent"><?php echo $result['content'];?></div>
 <br>
+=======
+    <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
+    <div id = "postcontent"><?php echo $result['content'];?></div>
+    <br>
+>>>>>>> so quero fazer pull
 <?php
     }
     
-    else if($result['type'] == "img"){ ?>
-   <h2><?php echo $votes." | ".$result['title'];  ?></h2>
+  else if($result['type'] == "img"){ ?>
+    <h2><?php echo $votes." | ".$result['title'];  ?></h2>
     <img src="<?php echo $result['content'] ?>"><br>
-   <?php }
+<?php 
+  }
         
     else if($result['type'] == "link"){?>
 <div id = "posttitle">  <h2><?php echo $votes; ?> | <a href="<?php echo $result['content'];?>"><?php echo $result['title'] ?></a></h2></div>
 <?php
-                                      }
+    }
     
      else if($result['type'] == "video"){?>
         <div id = "posttitle">

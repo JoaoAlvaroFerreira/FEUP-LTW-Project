@@ -65,6 +65,7 @@ if(isset($_GET['sort']))
     $votes = getVotesPost($row['postID']);?>
 
     <div id = "postlist">
+<<<<<<< HEAD
     <button type="button">Upvote</button>
     <button type="button">Downvote</button>
     <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $votes?> | <?php echo $row['title']?></a>
@@ -72,6 +73,15 @@ if(isset($_GET['sort']))
    <br>
         
 </div>
+=======
+        <?php echo $votes?>
+        <span> | </span>
+        <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
+        <span id="separator">by</span>
+        <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
+        <br>
+    </div>
+>>>>>>> so quero fazer pull
 
 <?php
         
