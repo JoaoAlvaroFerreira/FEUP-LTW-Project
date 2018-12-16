@@ -12,6 +12,7 @@
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
     <link rel="icon" href="..//pages/images/fire_icon.png">
+    <script src="../js/script.js" defer></script>
 </head>
 
 <body>
@@ -25,9 +26,8 @@
         <li>
             <a href="#">Stories</a>
             <ul>
-                <li><a href="../pages/frontpage.php">Top Voted</a></li>
-                <li><a href="../pages/frontpage.php">Most Recent</a></li>
-                <li><a href="../pages/frontpage.php">Sort by Channel</a></li>
+                <li><a href="../pages/frontpage.php?sort=votes">Top Voted</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Most Recent</a></li>
             </ul>
         </li>
         <li>
