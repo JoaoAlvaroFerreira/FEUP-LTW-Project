@@ -3,12 +3,12 @@
   <section class="user_options">
   <section id="login">
     
-    <h3>Está nesta página como Guest, faça log in para escrever ou commentar num post. </h3>
+    <div>Login</div>
 
     <form method="post" action="../actions/act_login.php">
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
-      <input type="submit" value="Login">
+      <input type="submit" value="Let me in!">
     </form>
 
   </section>
@@ -18,13 +18,13 @@
 ?>
   <section id="register">
     
-    <h3>Não está inscrito? Registe-se!</h3>
+    <div>Register</div>
 
     <form method="post" action="../actions/act_register.php">
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
        <input type="text" name="email" placeholder="email" required>
-      <input type="submit" value="Register">
+      <input type="submit" value="Register me!">
     </form>
 
   </section>

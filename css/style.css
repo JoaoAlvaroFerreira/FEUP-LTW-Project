@@ -1,51 +1,106 @@
 body{
+    margin: 0 auto;
 
-    --bg-color:#ADD8E6;
+    --bg-color: #ffcc5c;
+    --main-color: #ff6f69;
+
+    --dark-color: #374d42ec;
+    --light-color: #88d8b0;
 
     background-color: var(--bg-color);
 }
 
-div#banner{
-    border-bottom: 0.25em solid black;
+a:link{    
+    position: relative;
+    text-decoration: none;
 }
 
-nav#menu > ul{
-    float: left;
+
+#logo_title{
+    padding: 0.5em;
+}
+
+#forum_title{
+    font-size: 150%;
+}
+
+#banner{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1em;
+    grid-template-columns: 2.5fr 1fr;
+
+    border-bottom: 0.25em solid var(--dark-color);
+}
+
+
+#logo_tabmenu{
+    background: var(--light-color);
+
+    display: grid;
+    grid-template-columns: 0.6fr 2fr;
+}
+
+
+
+#menu{
+    display: grid;
+    align-content: end;
+    justify-items: start;
+    grid-template-columns: repeat(3, 1fr); /*se quiser adicionar mais sorts tenho de adicionar mais colunas*/
     
     list-style-type:none;
+    font-weight: bold;
 }
 
-#menu > ul > li{
-    background: red;
-    padding: 0.25em;
+#menu > li{
+    background: var(--dark-color);
+    
+    padding: 0.1em;
 }
 
-#menu > ul > li:nth-child(odd){
-    background: blue;
-    padding: 0.25em;
+#menu > li > a.active{
+    background-color: var(--dark-color);
+    color: white;
+}
+  
+#menu > li > a:hover:not(.active){
+    background-color: var(--dark-color);
+    color: white;
 }
 
 
 
 .user_options{
     display: grid;
-    /* grid-template-rows: 20% auto;
-    grid-template-columns: auto 10% 10%; */
+    grid-template-rows: auto auto;
+
+    background: var(--light-color);
 }
 
-.user_options #login{
-    float: right;
+/* .user_options #login{
+    
 
-    background: blue;
-    padding: 1em;
+  
 }
 
 .user_options #register{
-    float: right;
+ 
 
-    background: red;
-    padding: 1em;
+} */
+
+
+
+input[type=password]{
+    box-sizing: border-box;
+    
 }
+
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+  }
