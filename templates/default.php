@@ -11,40 +11,47 @@
     <meta charset="utf-8">
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" href="..//pages/images/fire_icon.png">
+    <link rel="icon" href="..//pages/images/rocket_icon.png">
     <script src="../js/script.js" defer></script>
 </head>
 
 <body>
    
     <header id="logo_tabmenu">
-        <a href="../pages/frontpage.php"><img src="images/real_logo.png" alt="A rocket, site icon"></a>
-    <nav class="nav">
+        <div id="logo_title">
+        <a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a>
+
+        
+ 
+        <nav class="nav">
     <ul>
         <li>
             <a href="#">About</a></li>
         <li>
             <a href="#">Stories</a>
             <ul>
-                <li><a href="../pages/frontpage.php?sort=votes">Top Voted</a></li>
-                <li><a href="../pages/frontpage.php?sort=new">Most Recent</a></li>
+                <li><a href="../pages/frontpage.php?sort=points">Sort by Votes</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Sort by New</a></li>
+                <li><a href="../pages/frontpage.php?sort=comments">Sort by Comments</a></li>
             </ul>
         </li>
         <li>
             <a href="#">User</a>
             <ul>
                 <li><a href="#">User List</a></li>
+               
                 <?php if(isset($_SESSION['username'])){ ?>
-                    <li><a href="../pages/viewProfile.php?username=<?php echo $_SESSION['username']?>">Your Profile</a></li>
-                    <li> <a href = "../actions/act_log_out.php"> Log Out</a></li>
-                <?php }else{ ?>
-                    <li><a onclick="document.getElementById('register').style.display='block'">Register</a></li>
-                    <li><a onclick="document.getElementById('login').style.display='block'">Log In</a></li>
+               <li><a href="../pages/viewProfile.php?username=<?php echo $_SESSION['username']?>">Your Profile</a></li>
+               <li> <a href = "../actions/act_log_out.php"> Log Out</a></li>
+               <?php }else{ ?>
+               <li><a onclick="document.getElementById('register').style.display='block'">Register</a></li>
+                <li><a onclick="document.getElementById('login').style.display='block'">Log In</a></li>
                 <?php }?>
             </ul>
         </li>
     </ul>
-    </nav>
+</nav>
+        </div>
         
         
         <?php draw_login();
@@ -56,6 +63,16 @@
         ?>
        
     <?php unset($_SESSION['message']); } ?>
+
+<?php 
+                                            
+                                       
+
+    
+?>
+
+
+    
 
 
 <?php } ?>

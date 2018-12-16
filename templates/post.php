@@ -7,7 +7,6 @@ include_once "../templates/default.php";
 include_once "../database/session.php";
 include_once "../templates/post.php";
 
-
 function draw_post($id){
     
     $db = Database::getInstance()->db();
@@ -16,10 +15,15 @@ function draw_post($id){
     $result = $stmt->fetch();
     
     $votes = getVotesPost($id);
+    ?>
     
-        
+    <div id = "postfull">
+    
+    <button type="button">Upvote</button>
+    <button type="button">Downvote</button> <?php
     if($result['type'] == "text"){ ?>
     <div id = "posttitle">
+        
         <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
 <div id = "postcontent"><?php echo $result['content'];?></div>
 <br>
@@ -49,8 +53,9 @@ function draw_post($id){
      }
     ?>
         
-<div id = "postfootnote"><br>Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>"><?php echo $result['username'];?></a> on <?php echo $result['dateWritten'];?></div>
-    
+<div id = "postfootnote"><br>Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>"><?php echo $result['username'];?></a> on <?php echo $result['dateWritten'];?>
+<p><?php echo getCommentsPost($result['postID']);?> comments</p></div>
+</div>
    <?php if(isset($_SESSION['username']))
        post_reply_box($id);
 
@@ -74,6 +79,17 @@ function getVotesPost($id){
     return $votes;
 }
 
+function getCommentsPost($id){
+    
+    $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM comments WHERE postID = ?');
+    $stmt->execute(array($id));
+    $result = $stmt->fetchAll();
+   
+    return count($result);
+}
+
+
 function draw_comments($postID, $fatherID, $level){
     echo "<br>";
     $db = Database::getInstance()->db();
@@ -88,13 +104,17 @@ function draw_comments($postID, $fatherID, $level){
     else{
         
     foreach($result as $row){
-        
+         echo "<div id = 'comment'> ";
          for ($counter = 0; $counter<$level; $counter++) {
     echo "______";
       }
+        ?>
+    <button type="button">Upvote</button>
+    <button type="button">Downvote</button>
+<?php
         $votes = getVotesComment($row['postID'],$row['commentID']);
         
-        echo "<div id = 'comment'> ".$votes. " | ";
+        echo $votes. " | ";
         echo $row['content']."</div><br>";
         
       
