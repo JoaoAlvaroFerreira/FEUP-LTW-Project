@@ -14,17 +14,24 @@ function draw_user_info($username){
     $stmt->execute(array($username));
     $result = $stmt->fetch();
     
-    echo "<p>User: ".$result['username']."</p>";
-    if(empty($result['dataRegistered']))
-        echo "This user chose to not disclose his date of registration.";
-    else
-        echo "<p>Registed since: ".$result['dataRegistered']."</p>";   
-    
-if(!empty($result['email']))
-        echo "E-Mail: ".$result['email'];
+    ?>
+    <div id = "profileInfo">
+        <p>User: <?php echo $result['username']; ?></p> <?php
+    if(empty($result['dataRegistered'])){
+        ?>
+        This user chose to not disclose his date of registration.
+        <?php
+    }else {
+        ?>
+        <p>Registed since: <?php echo $result['dataRegistered']; ?></p>
+    <?php
+if(!empty($result['email'])) ?>
+        <p>E-Mail: <?php echo $result['email']; ?></p>
+        
+        
 
- 
-    
+</div>
+<?php }
 }
 
 function draw_user_posts($username){
@@ -37,21 +44,24 @@ function draw_user_posts($username){
     $stmt->execute(array($username));
     $result = $stmt->fetchAll();
     
-    if(empty($result))
-        echo "<h3>This user hasn't made any posts</h3>";
-    else{
-    echo "<h3>Posts made by this user:</h3>";
-    foreach ($result as $row) {
+    if(empty($result)){
+        ?><h3>This user hasn't made any posts</h3><?php
+    }else{ ?>
+    
+    <div id = "userposts"> <h3>Posts made by this user:</h3>
+    <?php
+    foreach ($result as $row){ 
     $votes = getVotesPost($row['postID']);
-    echo '<a href = "../pages/viewPost.php?id='.$row['postID'].'">'. $votes. " | " .$row['title'] . '</a>';
-    echo "<br>";
+        ?>
+    <div id = "userpostlist">
+    <button type="button">Upvote</button>
+    <button type="button">Downvote</button>
+    <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $votes;?> | <?php echo $row['title'];?></a>
+   <br>
+        
+        </div> </div> <?php
+        }
+    }    
 }
-    }
-    
-
-
-    
-}
-
 
 ?>
