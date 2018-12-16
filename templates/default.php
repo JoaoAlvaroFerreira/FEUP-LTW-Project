@@ -11,58 +11,79 @@
     <meta charset="utf-8">
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" href="..//pages/images/fire_icon.png">
+    <link rel="icon" href="..//pages/images/rocket_icon.png">
 </head>
 
 <body>
-    <div id="banner">
+   
     <header id="logo_tabmenu">
         <div id="logo_title">
-        <a href="../pages/frontpage.php"><img src="images/rocket_icon.png" alt="A rocket, site icon"></a>
-        <div id="forum_title">RocketBoost</div>
+        <a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a>
+
+        
+ 
+        <nav class="nav">
+    <ul>
+        <li>
+            <a href="#">About</a></li>
+        <li>
+            <a href="#">Stories</a>
+            <ul>
+                <li><a href="../pages/frontpage.php">Sort by Votes</a></li>
+                <li><a href="../pages/frontpage.php">Sort by New</a></li>
+                <li><a href="../pages/frontpage.php">Sort by Channel</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">User</a>
+            <ul>
+                <li><a href="#">User List</a></li>
+               
+                <?php if(isset($_SESSION['username'])){ ?>
+               <li><a href="../pages/viewProfile.php?username=<?php echo $_SESSION['username']?>">Your Profile</a></li>
+               <li> <a href = "../actions/act_log_out.php"> Log Out</a></li>
+               <?php }else{ ?>
+               <li><a onclick="document.getElementById('register').style.display='block'">Register</a></li>
+                <li><a onclick="document.getElementById('login').style.display='block'">Log In</a></li>
+                <?php }?>
+            </ul>
+        </li>
+    </ul>
+</nav>
         </div>
         
-        <nav id="menu">
-            <li><a class="active">hot</a></li>
-            <li><a>new</a></li>
-            <li><a>top</a></li>
-        </nav>
+        
+        <?php draw_login();
+            draw_register();?>
     </header>
-    <?php if (isset($_SESSION['message'])) {
+   
+        <?php if (isset($_SESSION['message'])) {
         $message=$_SESSION['message'];
         ?>
-        <section id="messages">
-            <?=$message?>
-        </section>
+       
     <?php unset($_SESSION['message']); } ?>
 
 <?php 
                                             
                                        
-   if (!isset($_SESSION['username'])){
-        
-       draw_login();
-       
-       draw_register();
-    }
-                                       
-        
-    else draw_logged_in();
+
     
 ?>
 
-</div>
+
     
 
 
 <?php } ?>
     
 
-<?php function draw_content() { 
+<?php function draw_floating_menu() { 
 
-    if (isset($_SESSION['username'])){
-        echo '<div class="site_message"><a href="../pages/makepost.php">Make your own post</a></div>';
-    }
+    if (isset($_SESSION['username'])){ ?>
+        
+       <div id="floating_menu"><h5>Hello <?php echo $_SESSION['username']?> !</h5>
+           <a href="../pages/makepost.php">Make your own post</a></div>
+   <?php }
 }
 ?>
 

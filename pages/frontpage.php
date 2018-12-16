@@ -7,8 +7,8 @@ include_once "../templates/post.php";
 
 
 draw_header();
-draw_content();
 draw_posts();
+draw_floating_menu();
 draw_footer();
 
 function draw_posts(){ 
@@ -19,10 +19,18 @@ function draw_posts(){
     $result = $stmt->fetchAll();
 
     foreach ($result as $row) {
-    $votes = getVotesPost($row['postID']);
-    echo '<a href = "../pages/viewPost.php?id='.$row['postID'].'">'. $votes. " | " .$row['title'] . '</a>';
-    echo '<a href = "../pages/viewProfile.php?username='.$row['username'].'">'. " by " .$row['username'] . '</a>';
-    echo "<br>";
+
+    $votes = getVotesPost($row['postID']);?>
+
+    <div id = "postlist">
+    <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $votes?> | <?php echo $row['title']?></a>
+    <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"> by <?php echo $row['username'];?></a>
+   <br>
+        
+</div>
+
+<?php
+   
     }
     
 }

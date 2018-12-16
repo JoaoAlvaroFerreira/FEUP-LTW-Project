@@ -83,6 +83,7 @@ function draw_comments($postID, $fatherID, $level){
       }
         $votes = getVotesComment($row['postID'],$row['commentID']);
         echo $votes. " | ";
+        echo $fatherID. " | ";
         echo $row['content']."<br>";
         
       
@@ -104,8 +105,8 @@ function draw_comments($postID, $fatherID, $level){
 function getVotesComment($idpost, $idcomment){
     
     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM commentvotes WHERE postID = ? AND commentId = ?');
-    $stmt->execute(array($idpost, $idcomment));
+    $stmt = $db->prepare('SELECT * FROM commentvotes WHERE commentId = ?');
+    $stmt->execute(array($idcomment));
     $result = $stmt->fetchAll();
     $votes = 0;
     

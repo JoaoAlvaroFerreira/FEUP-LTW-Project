@@ -1,20 +1,32 @@
 body{
+    
     margin: 0 auto;
 
-    --bg-color: #ffcc5c;
-    --main-color: #ff6f69;
+    --bg-color: #C8C6D7;
+    --main-color: #783F8E;
 
-    --dark-color: #374d42ec;
-    --light-color: #88d8b0;
+    --dark-color: #4F1271;
+    --light-color: #4A4063;
 
     background-color: var(--bg-color);
+    
+     font-weight: 700; 
+    font-size: 14px;
+    font-family: Lato,Arial,sans-serif;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
 }
 
 a:link{    
     position: relative;
     text-decoration: none;
+    webkit-transition: all 1s linear; 
+    
+    color: #aa0000; 
+    padding: 1.5px; 
+    -webkit-transition: all 1s linear;
 }
 
+a:hover { background: var(--main-color); color: #fff; }
 
 #logo_title{
     padding: 0.5em;
@@ -22,17 +34,19 @@ a:link{
 
 #forum_title{
     font-size: 150%;
+    
 }
 
 #banner{
+    
     display: grid;
     grid-template-columns: 2.5fr 1fr;
-
     border-bottom: 0.25em solid var(--dark-color);
 }
 
 
 #logo_tabmenu{
+    
     background: var(--light-color);
 
     display: grid;
@@ -42,6 +56,7 @@ a:link{
 
 
 #menu{
+    
     display: grid;
     align-content: end;
     justify-items: start;
@@ -69,26 +84,6 @@ a:link{
 
 
 
-.user_options{
-    display: grid;
-    grid-template-rows: auto auto;
-
-    background: var(--light-color);
-}
-
-/* .user_options #login{
-    
-
-  
-}
-
-.user_options #register{
- 
-
-} */
-
-
-
 input[type=password]{
     box-sizing: border-box;
     
@@ -104,3 +99,140 @@ input[type=password]{
     color: black;
     text-align: center;
   }
+
+.nav ul {
+    *zoom:1;
+    list-style:none;
+    margin:0;
+    padding:0;
+   
+}
+.nav ul:before,.nav ul:after {
+    content:"";
+    display:table;
+}
+.nav ul:after {
+    clear:both;
+}
+.nav ul > li {
+    float:left;
+    position:relative;
+}
+.nav a {
+    display:block;
+    padding:10px 20px;
+    line-height:1.2em;
+    color:#fff;
+    border-left:1px solid #595959;
+}
+
+.nav element {
+    display:block;
+    padding:10px 20px;
+    line-height:1.2em;
+    color:#fff;
+    border-left:1px solid #595959;
+}
+
+.nav a:hover {
+    text-decoration:none;
+    background:#595959;
+}
+.nav li ul {
+    background:#273754;
+}
+.nav li ul li {
+    width:200px;
+}
+.nav li ul a {
+    border:none;
+}
+
+.nav li ul element {
+    border:none;
+}
+.nav li ul a:hover {
+    background:rgba(0,0,0,0.2);
+}
+
+.nav li ul {
+    position:absolute;
+    left:0;
+    top:36px;
+    z-index:1;
+    max-height:0;
+    overflow:hidden;
+    -webkit-transform:perspective(400) rotate3d(1,0,0,-90deg);
+    -webkit-transform-origin:50% 0;
+    -webkit-transition:350ms;
+    -moz-transition:350ms;
+    -o-transition:350ms;
+    transition:350ms;
+}
+.nav ul > li:hover ul {
+    max-height:1000px;
+    -webkit-transform:perspective(400) rotate3d(0,0,0,0);
+}
+
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 80%;
+  padding: 12px 12px;
+  margin: 12px 12px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+/* The Modal (background) */
+.container {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.authform {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 2px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  height: 25%;
+}
+
+#postlist{
+background-color: #fafafa;
+  border: 2px solid #783F8E;
+  width: 90%;
+  padding: 15px;
+    margin: auto;
+    
+font-size: 18px;
+ 
+}
+
+#floating_menu{
+    background-color: red;
+  border: 2px solid black;
+  
+  
+    margin: auto;
+    padding: 10px;;
+    width: 130px;
+    z-index: 2;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    
+}
+
