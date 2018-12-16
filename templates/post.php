@@ -7,6 +7,7 @@ include_once "../templates/default.php";
 include_once "../database/session.php";
 include_once "../templates/post.php";
 
+
 function draw_post($id){
     
     $db = Database::getInstance()->db();
