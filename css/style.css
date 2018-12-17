@@ -192,23 +192,29 @@ input[type=text], input[type=password] {
     text-decoration: underline;
 }
 
-#floating_menu{
+#floatingmenu{
     background-color: var(--main-color);
     border: 0.5px solid black;
     
     color: white;
-    
-    margin: auto;
     padding: 10px;;
     width: 130px;
-    /* z-index: 2; */
-    position: fixed;
+    z-index: 9;
+    position: absolute;
     top: 40px;
     right: 40px;   
 }
 
-#floating_menu a{
+#floatingmenu a{
     color: white;
+}
+
+#floatingmenuheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
 }
 
 .votes_frontpage {

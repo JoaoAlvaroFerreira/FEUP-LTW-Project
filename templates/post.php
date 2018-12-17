@@ -277,8 +277,9 @@ function draw_video($video){?>
 
  function comment_reply_box($postID, $fatherID) { 
 ?>
+   
 
-  <form method="post" action="../actions/act_comment.php" id="commentreply">
+  <form method="post" action="../actions/act_comment.php"  id="commentreply">
     <input type="hidden" name="postID" value="<?php echo $postID?>">
     <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
   <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->

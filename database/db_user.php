@@ -26,4 +26,21 @@
       
       return true;
   }
+
+
+    function editProfileInfo($username,$password,$profileimg,$email,$description,$dateofbirth, $oldusername){
+        
+        if(checkPassword($oldusername,$password)){
+  
+            
+        $db = Database::getInstance()->db();
+        $statement = $db->prepare('UPDATE users SET username = ?, passw = ? , profileimg= ?, email= ?, description= ?, dateofbirth=? WHERE username = ?');
+            
+   $options = ['cost' => 12];
+    $statement->execute(array($username,password_hash($password, PASSWORD_DEFAULT, $options),$profileimg,$email,$description,$dateofbirth,$oldusername));
+            
+            return true;
+        }
+        return false;
+    }
 ?>
