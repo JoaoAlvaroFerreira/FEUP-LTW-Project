@@ -36,30 +36,31 @@ if(!empty($result['email'])) ?>
 
 function draw_user_posts($username){
     
-    
-    
- 
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM posts WHERE username=?');
     $stmt->execute(array($username));
     $result = $stmt->fetchAll();
     
-    if(empty($result)){
-        ?><h3>This user hasn't made any posts</h3><?php
-    }else{ ?>
+    if(empty($result)){?>
+        <h3>This user hasn't made any posts</h3><?php
+    }
     
-    <div id = "userposts"> <h3>Posts made by this user:</h3>
-    <?php
-    foreach ($result as $row){ 
-    $votes = getVotesPost($row['postID']);
-        ?>
+    else{ ?> 
+        <div id = "userposts"> <h3>Posts made by this user:</h3>
+S<?php
+        foreach ($result as $row){ 
+            $votes = getVotesPost($row['postID']);
+?>
     <div id = "userpostlist">
-    <button type="button">Upvote</button>
-    <button type="button">Downvote</button>
+        <div class="votes">
+            <input type="button" value="Upvote">
+            <input type="button" value="Downvote">
+        </div>
     <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $votes;?> | <?php echo $row['title'];?></a>
    <br>
-        
-        </div> </div> <?php
+    </div>
+        </div> 
+<?php
         }
     }    
 }

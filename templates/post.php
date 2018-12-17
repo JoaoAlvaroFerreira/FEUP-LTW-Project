@@ -15,56 +15,102 @@ function draw_post($id){
     $result = $stmt->fetch();
     
     $votes = getVotesPost($id);
-    ?>
+?>
     
-    <div id = "postfull">
-    
-    <button type="button">Upvote</button>
-    <button type="button">Downvote</button> <?php
+<div id = "full_post">
+
+<?php
     if($result['type'] == "text"){ ?>
-    <div id = "posttitle">
-<<<<<<< HEAD
-        
-        <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
-<div id = "postcontent"><?php echo $result['content'];?></div>
-<br>
-=======
-    <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
-    <div id = "postcontent"><?php echo $result['content'];?></div>
+    <div class="post_banner">
+      <div class="votes">
+        <input type="button" value="Upvote">
+        <input type="button" value="Downvote">
+      </div>
+        <div class = "post_title">
+          <?php echo $result['title']; ?>
+        </div>
+      </div>
+      <div class="post_votes">
+          <?php echo $votes; ?><span> Vote(s)</span>
+        </div>
+      <div class = "post_content">       
+        <?php echo $result['content']; ?>
+      </div>
     <br>
->>>>>>> so quero fazer pull
 <?php
     }
     
   else if($result['type'] == "img"){ ?>
-    <h2><?php echo $votes." | ".$result['title'];  ?></h2>
-    <img src="<?php echo $result['content'] ?>"><br>
+  <div class="post_banner">
+      <div class="votes">
+      <input type="button" value="Upvote">
+      <input type="button" value="Downvote">
+    </div> 
+            <div class="post_title">
+              <?php echo $result['title']; ?>
+            </div>
+          </div>
+          <div class="post_votes">
+            <?php echo $votes; ?>
+          </div>
+          <div class = "post_content">
+            <img src="<?php echo $result['content'] ?>"><br>
+          </div>
 <?php 
   }
         
-    else if($result['type'] == "link"){?>
-<div id = "posttitle">  <h2><?php echo $votes; ?> | <a href="<?php echo $result['content'];?>"><?php echo $result['title'] ?></a></h2></div>
+  else if($result['type'] == "link"){?>
+  <div class="post_banner">
+      <div class="votes">
+      <input type="button" value="Upvote">
+      <input type="button" value="Downvote">
+    </div>
+    <div class="post_title">
+        <?php echo $result['title'] ?></a>
+    </div>
+  </div>
+      <div class="post_votes">
+        <?php echo $votes; ?>
+      </div>
+      <div class = "post_content">
+        <a href="<?php echo $result['content'];?>">
+      </div>
 <?php
     }
     
-     else if($result['type'] == "video"){?>
-        <div id = "posttitle">
-        <h2><?php echo $votes." | ".$result['title']; ?></h2> </div>
+  else if($result['type'] == "video"){?>
+   <div class="post_banner">
+      <div class="votes">
+      <input type="button" value="Upvote">
+      <input type="button" value="Downvote">
+    </div>
+      <div class = "post_title">
+        <?php echo $result['title']; ?>
+      </div>
+    </div>
+    <div class="post_votes">
+        <?php echo $votes; ?>
+      </div>
         
 <?php //não tocar nisto, é para ler videos de youtube
-         $url = $result['content'];
-         parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars);
-         $str = $array_of_vars['v'];
-         draw_video($str);
+    $url = $result['content'];
+    parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars);
+    $str = $array_of_vars['v'];
+    draw_video($str);
 
-     }
-    ?>
+  }
+?>
         
-<div id = "postfootnote"><br>Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>"><?php echo $result['username'];?></a> on <?php echo $result['dateWritten'];?>
-<p><?php echo getCommentsPost($result['postID']);?> comments</p></div>
+<div id="post_footnote">
+  Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>">
+  <?php echo $result['username'];?></a> on <?php echo $result['dateWritten'];?>
+  <div id="comment_number"><?php echo getCommentsPost($result['postID']);?> comments</div>
 </div>
-   <?php if(isset($_SESSION['username']))
-       post_reply_box($id);
+
+</div>
+
+  <?php if(isset($_SESSION['username']))
+    post_reply_box($id);
 
 }
 
@@ -210,47 +256,36 @@ function draw_video($video){?>
     </script>
 <?php }
 
+//ids iguais up ahead part 2
+
  function post_reply_box($postID) { 
 ?>
-  <section id="postreply">
-    
 
-    <form method="post" action="../actions/act_comment.php" id = "postreply">
-        <input type="hidden" name="postID" value="<?php echo $postID?>">
-        <br>
+  <form method="post" action="../actions/act_comment.php" id = "postreply">
+    <input type="hidden" name="postID" value="<?php echo $postID?>">
+      <br>
   <!--   <textarea name="content" placeholder="Write your comment here" form="postreply" rows="3" cols="40"></textarea>-->
-       <input type="text" name="content" placeholder="Write here">
-        <br>
-      <input type="submit" value="Reply" id="postreply">
-      <input type="reset" id="postreply">
-         
-    </form>
-
-
-  </section>
+    <input type="text" name="content" placeholder="Write here">
+      <br>
+    <input type="submit" value="Reply" id="postreply">
+    <input type="reset" id="postreply">    
+  </form>
 
 <?php } 
 
+//ids iguais up ahead
+
  function comment_reply_box($postID, $fatherID) { 
 ?>
-  <section id="commentreply">
-    
 
-   
-    <form method="post" action="../actions/act_comment.php" id="commentreply">
-        <input type="hidden" name="postID" value="<?php echo $postID?>">
-        <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
+  <form method="post" action="../actions/act_comment.php" id="commentreply">
+    <input type="hidden" name="postID" value="<?php echo $postID?>">
+    <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
   <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
-        <input type="text" name="content" placeholder="Write here">
-        <br>
-      <input type="submit" value="Reply" id="commentreply">
-      <input type="reset">
-         
-        
-    </form>
+    <input type="text" name="content" placeholder="Write here">
+    <br>
+    <input type="submit" value="Reply" id="commentreply">
+    <input type="reset">
+  </form>
 
-
-  </section>
-<?php }  
-
-?>
+<?php }  ?>

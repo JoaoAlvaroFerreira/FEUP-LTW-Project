@@ -16,20 +16,9 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-   
-    <header id="logo_tabmenu">
-        <div id="logo_title">
-        <a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a>
-
-        
- 
-        <nav class="nav">
-=======
     <header id="logo_tabmenu">       
-    <div><a href="../pages/frontpage.php"><img src="images/real_logo.png" alt="A rocket, site icon"></a></div>
+    <div><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
     <nav class="nav">
->>>>>>> so quero fazer pull
     <ul>
         <li>
             <a href="#">About</a></li>

@@ -64,28 +64,22 @@ if(isset($_GET['sort']))
 
     $votes = getVotesPost($row['postID']);?>
 
-    <div id = "postlist">
-<<<<<<< HEAD
-    <button type="button">Upvote</button>
-    <button type="button">Downvote</button>
-    <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $votes?> | <?php echo $row['title']?></a>
-    <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"> by <?php echo $row['username'];?></a>
-   <br>
-        
-</div>
-=======
-        <?php echo $votes?>
-        <span> | </span>
-        <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
-        <span id="separator">by</span>
-        <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
-        <br>
+    <div id="postlist">
+        <div class="votes_frontpage">
+            <input type="button" value="Upvote">
+            <input type="button" value="Downvote">
+        </div>
+        <div id="post_info">
+            <?php echo $votes?>
+            <span class="separator"> | </span>
+            <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
+            <span class="separator">by</span>
+            <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
+            <br>
+        </div>
     </div>
->>>>>>> so quero fazer pull
 
-<?php
-        
-        
+<?php     
    
     }
     
