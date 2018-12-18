@@ -51,11 +51,6 @@ CREATE TABLE postvotes
     PRIMARY KEY(postID,username)
 );
 
-INSERT INTO users VALUES ('Andre','12345',NULL,'andre@yahoo.pt',NULL,NULL,'2018-06-25');
-INSERT INTO users VALUES ('Joao','234',NULL,'joao123@gmail.com',NULL,NULL,'2018-06-20');
-INSERT INTO users VALUES ('Ricardo','12345',NULL,'ricardofpt@gmail.com',NULL,NULL,'2018-06-28');
-INSERT INTO users VALUES ('Chico','passdochico',NULL,'chicochico@hotmail.com',NULL,NULL,'2018-10-28');
-INSERT INTO users VALUES ('simao','simaosimao',NULL,'simao@gmail.com',NULL,NULL,'2018-12-18');
 
 
 INSERT INTO users VALUES ('Andre','12345',NULL,'andre@yahoo.pt',NULL,'1998-09-03','2018-06-25');
@@ -101,4 +96,3 @@ INSERT INTO postvotes VALUES (6,'Chico',1);
 INSERT INTO postvotes VALUES (6,'Andre',0);
 INSERT INTO postvotes VALUES (6,'GajoDeAlfama',0);
 INSERT INTO postvotes VALUES (6,'PaiNatal',1);
-
