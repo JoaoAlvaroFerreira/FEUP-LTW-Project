@@ -54,6 +54,7 @@ INSERT INTO users VALUES ('Andre','12345',NULL,'andre@yahoo.pt',NULL,NULL,'2018-
 INSERT INTO users VALUES ('Joao','234',NULL,'joao123@gmail.com',NULL,NULL,'2018-06-20');
 INSERT INTO users VALUES ('Ricardo','12345',NULL,'ricardofpt@gmail.com',NULL,NULL,'2018-06-28');
 INSERT INTO users VALUES ('Chico','passdochico',NULL,'chicochico@hotmail.com',NULL,NULL,'2018-10-28');
+INSERT INTO users VALUES ('simao','simaosimao',NULL,'simao@gmail.com',NULL,NULL,'2018-12-18');
 
 INSERT INTO posts VALUES (NULL,'Titulo Teste','Conteudo','text','2018-09-25','Andre');
 INSERT INTO posts VALUES (NULL,'Post do Catano','Ai que dor de costas','text','2018-11-25','Andre');

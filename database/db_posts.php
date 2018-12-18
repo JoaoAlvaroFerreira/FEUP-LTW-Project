@@ -31,4 +31,15 @@
     return true;
         
     }
+
+function deleteComment($id){
+        
+    $db = Database::getInstance()->db();
+    $stmt = $db->prepare('DELETE FROM comments WHERE commentID=?');
+    $stmt->execute(array($id));
+    echo $id;
+      
+    return true;
+        
+    }
 ?>

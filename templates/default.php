@@ -11,13 +11,13 @@
     <meta charset="utf-8">
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" href="..//pages/images/rocket_icon.png">
+<link rel="icon" href="..//pages/images/fire_icon.png">
     <script src="../JS/script.js" defer></script>
 </head>
 
 <body>
     <header id="logo_tabmenu">       
-    <div><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
+   <div id="logo"><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
     <nav class="nav">
     <ul>
         <li>
@@ -33,9 +33,9 @@
         <li>
             <a href="#">Stories</a>
             <ul>
-                <li><a href="../pages/frontpage.php?sort=points">Sort by Points</a></li>
-                <li><a href="../pages/frontpage.php?sort=new">Sort by New</a></li>
-                <li><a href="../pages/frontpage.php?sort=comments">Sort by Comments</a></li>
+                <li><a href="../pages/frontpage.php?sort=points">Most Voted</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Most Recent</a></li>
+                <li><a href="../pages/frontpage.php?sort=comments">Most Comments</a></li>
             </ul>
         </li>
         <li>
@@ -57,7 +57,7 @@
     <form action="../pages/search.php">
       <input type="text" placeholder="Search.." name="search">
         <select name="Type" >
-    <option value="Posts">Posts</option>
+    <option value="Posts">Stories</option>
     <option value="Comments">Comments</option>
     <option value="Users">Users</option>
   </select>
@@ -69,11 +69,23 @@
     </form>
   </div>
 </nav>
+           
+        <?php draw_register();
+                              draw_login();
+         ?>
         
-        
-        
-        <?php draw_login();
-            draw_register();?>
+        <script>
+
+var containerreg = document.getElementById('register');
+var containerlog = document.getElementById('login');        
+
+window.onclick = function(event) {
+    if (event.target == containerreg || event.target == containerlog) {
+        containerreg.style.display = "none";
+        containerlog.style.display = "none";
+    }
+}
+</script>
     </header>
    
      
@@ -84,7 +96,7 @@
 
     
 ?>
-
+    
 
     
 
@@ -110,8 +122,8 @@
            
        <p><img src="<?php echo $result['profileimg']; ?>" width=50 height = 50></p>  <?php
                                                    }?>
-           <a href="../pages/makepost.php">Make your own post</a>
-            <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p>
+          <div id = "floatingmessage"> <a href="../pages/makepost.php">Make your own post</a>
+           <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p></div>
                       
 
            <h5><?php }if (isset($_SESSION['message']))
