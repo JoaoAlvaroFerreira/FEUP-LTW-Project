@@ -12,7 +12,7 @@
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
 <link rel="icon" href="..//pages/images/fire_icon.png">
-    <script src="../JS/script.js" defer></script>
+<script src="../JS/script.js" defer></script>
 </head>
 
 <body>

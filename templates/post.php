@@ -26,12 +26,12 @@ function draw_post($id){
         <input type="button" value="Upvote">
         <input type="button" value="Downvote">
       </div>
-        <span class="post_id"><?=$id?></span>
+        <span class="id"><?=$id?></span>
         <div class = "post_title">
           <?php echo $result['title']; ?>
         </div>
       </div>
-      <span id="votes"><?php echo $votes?> Vote(s)</span>
+      <span id="votes"><?php echo $votes?></span>
        <div class = "post_content">       
          <?php echo $result['content']; ?>
       </div>
@@ -45,12 +45,12 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div> 
-    <span class="post_id"><?=$id?></span>
+    <span class="id"><?=$id?></span>
             <div class="post_title">
               <?php echo $result['title']; ?>
             </div>
           </div>
-          <span id="votes"><?php echo $votes?> Vote(s)</span>
+          <span id="votes"><?php echo $votes?></span>
           <div id = "post_image">
             <img src="<?php echo $result['content'] ?>"> 
           </div>
@@ -277,7 +277,7 @@ function draw_comments($postID, $fatherID, $level){
    <center><h2>Are you sure? You won't be able to get your comment back.</h2>
        
        <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
-        <input type="hidden" name="post_id" value="<?php echo $row['commentID'];?>" >
+        <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
         <input type="submit" value="Yes"/>
        </form> </center>
         </div>
@@ -366,7 +366,7 @@ function draw_video($video){?>
 
   <form method="post" action="../actions/act_comment.php" id = "post_reply">
       <input type="hidden" name="postID" value="<?php echo $postID?>">
-      <textarea placeholder="Write your reply here..."></textarea>
+      <input type="text" name="content" placeholder="Write your comment">
       <div>
         <input type="submit" value="Reply">
         <input type="reset" value="Reset">
@@ -382,7 +382,7 @@ function draw_video($video){?>
       <input type="hidden" name="postID" value="<?php echo $postID?>">
       <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
   <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
-      <textarea placeholder="Write your reply here..."></textarea>
+       <input type="text" name="content" placeholder="Write your comment">
       <div>
         <input type="submit" value="Reply">
         <input type="reset" value="Reset">
