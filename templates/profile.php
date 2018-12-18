@@ -16,23 +16,22 @@ function draw_user_info($username){
      
           ?>
 
-    <div id="profileInfo">
-        
+    <div id="profileInfo"> 
         <?php if($result['profileimg'] != ''){ ?>
-       <p> <img src="<?php echo $result['profileimg']; ?>" width=100 height = 100></p>  
-       <?php   } ?>
+        <div> <img src="<?php echo $result['profileimg']; ?>" width=100 height = 100></div>  
+        <?php   } ?>
         
-        <p>User: <?php echo $result['username']; ?></p>
+        <div id="user_name">User: <?php echo $result['username']; ?></div>
         
-        <p>Registed since: <?php echo $result['dataRegistered']; ?></p>
+        <div id="date_register">Registed since: <?php echo $result['dataRegistered']; ?></div>
   
-        <p>E-Mail: <?php echo $result['email']; ?></p>
+        <div id="email">E-Mail: <?php echo $result['email']; ?></div>
         
         <?php if($result['dateofbirth']!= ''){ ?>
-       <p>Data of Birth: <?php echo $result['dateofbirth']; ?></p>  <?php }
+        <div id="date_birth">Data of Birth: <?php echo $result['dateofbirth']; ?></div>  <?php }
             
         if($result['description']!= ''){ ?>
-        <p>Description: <?php echo $result['description']; ?></p>  <?php } ?> 
+        <div id="user_description">Description: <?php echo $result['description']; ?></div>  <?php } ?> 
     </div>
         
    
@@ -40,7 +39,7 @@ function draw_user_info($username){
     
      if(isset($_SESSION['username'])) {
     if($username == $_SESSION['username']){ ?>
-        <button onclick="document.getElementById('editprofile').style.display='block'">Edit Profile</button>
+        <button onclick="document.getElementById('editprofile')" id="edit_button">Edit Profile</button>
 <?php } } ?>   
 
     <center id="editprofile" class="container">

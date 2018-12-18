@@ -477,7 +477,7 @@ input[type=text], input[type=password] {
     display: block;
 }
 
-#post_reply textarea, .comment_reply textarea{
+#post_reply input[type=text], .comment_reply input[type=text]{
     margin: 1em;
     padding: 1em 1em;
 
@@ -492,17 +492,16 @@ input[type=text], input[type=password] {
     overflow: auto;
 }
   
-#post_reply textarea:focus {
+#post_reply input[type=text]:focus {
     width: 95%;
     height: 20%;
 }
 
-.comment_reply textarea:focus {
+.comment_reply input[type=text]:focus {
     width: 30%;
-    height: 20%;
 }
 
-#post_reply input[type="submit"], #post_reply input[type="reset"] {
+#post_reply input[type="submit"], #post_reply input[type="reset"], #comment_reply input[type="submit"], #comment_reply input[type="reset"]{
     margin: 1em;
     margin-top: -1em;
 
@@ -515,27 +514,50 @@ input[type=text], input[type=password] {
     font-size: 110%;
 }
 
-#post_reply input[type="submit"]:hover, #post_reply input[type="reset"]:hover{
+#post_reply input[type="submit"]:hover, #post_reply input[type="reset"]:hover, #comment_reply input[type="submit"], #comment_reply input[type="reset"]{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.id{
+.id, .commentid{
     visibility: hidden;
 }
 
-/* #deletepost{
+#profileInfo {
+    border-bottom: 0.1em dotted var(--main-color);
+}
+
+#profileInfo *{
+    padding: 1em;
+    border: 5px solid grey;
+}
+
+#edit_button {
+    padding: 1em;
+    margin: 1em;
+
+    border-radius: 2px;
+}
+
+#edit_button:hover {
+    cursor: pointer;
+}
+
+#post_delete_button, #comment_delete_button {
     margin: 1em;
     margin-top: -1em;
 
-    background-color: var(--main-color);
+    background-color: #ff4d4d;
     border: none;
-    border-radius: 20%;
+    border-radius: 2px;
     color: white;
     text-decoration: none;
     cursor: pointer;
     font-size: 110%;
-} */
+}
 
+#post_delete_button:hover, #comment_delete_button:hover {
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 #comment_content {
     box-sizing: content-box;
     width: 50%;
@@ -550,4 +572,32 @@ input[type=text], input[type=password] {
     margin-right: 2em;
     margin-top: 1em;
     margin-bottom: 0.5em;
+}
+
+.search-container input[type=text], #channelsearch input[type=text]{
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.search-container input[type=text]:hover, #channelsearch input[type=text]:hover {
+    width: 60%;
+}
+
+#postform {
+    display: block;
+    margin: 1em;
+}
+
+#content_form {
+
 }

@@ -73,8 +73,9 @@
   </div>
         
         <form>
-<input type="text" size="30" placeholder="Channel Search..." onkeyup="draw_channel_search(this.value)">
-<div id="channelsearch"></div>
+        <div id="channelsearch">
+            <input type="text" placeholder="Channel Search..." onkeyup="draw_channel_search(this.value)">
+        </div>
 </form>
 </nav>
            

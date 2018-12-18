@@ -114,7 +114,7 @@ function draw_post($id){
     
   if(isset($_SESSION['username'])) {
     if($result['username'] == $_SESSION['username']){ ?>
-        <button onclick="document.getElementById('deletePost').style.display='block'">Delete Post</button>
+        <button onclick="document.getElementById('deletePost').style.display='block'" id="post_delete_button">Delete Post</button>
 <?php
     } } 
 ?>
@@ -242,7 +242,7 @@ function draw_comments($postID, $fatherID, $level){
 <?php
         $votes = getVotesComment($row['commentID']); 
 ?>
-        <span id="votesCom"><?php echo $votes?></span>
+        <span id="votesCom"><?php echo $votes?> Vote(s)</span>
         <div id="comment_content">
           <?php echo $row['content'];?>
         </div>
@@ -251,8 +251,8 @@ function draw_comments($postID, $fatherID, $level){
 <?php
 
 if(isset($_SESSION['username'])) {
-  if($row['username'] == $_SESSION['username']){ ?>
-      <button onclick="document.getElementById('deleteComment').style.display='block'">Delete Comment</button>
+  if($row['username'] == $_SESSION['username']){ ?><br>
+      <button onclick="document.getElementById('deleteComment').style.display='block'" id="comment_delete_button">Delete Comment</button>
   <?php
   } }
         
@@ -359,8 +359,8 @@ function draw_video($video){?>
   <form method="post" action="../actions/act_comment.php" id = "post_reply">
       <input type="hidden" name="postID" value="<?php echo $postID?>">
       <input type="text" name="content" placeholder="Write your comment...">
-      <div>
-        <input type="submit" value="Reply" class="container">
+      <div class="reply_reset_buttons">
+        <input type="submit" value="Reply">
         <input type="reset" value="Reset">
       </div>
   </form>
@@ -375,7 +375,7 @@ function draw_video($video){?>
       <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
   <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
        <input type="text" name="content" placeholder="Write your comment">
-      <div>
+      <div class="reply_reset_buttons">
         <input type="submit" value="Reply">
         <input type="reset" value="Reset">
       </div>
