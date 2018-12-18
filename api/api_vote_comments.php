@@ -7,24 +7,24 @@
         die(json_encode('not_logged_in'));
     }
     $username = $_SESSION['username'];
-    $comm_id = $_POST['comm_id'];
+    $com_id = $_POST['com_id'];
     $positive = $_POST['positive'];
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM commentvotes WHERE username = ? AND commentID = ?');
-    $stmt->execute(array($username,$comm_id));
+    $stmt->execute(array($username,$com_id));
     $vote = $stmt->fetch();
     if($vote==FALSE){
         $stmt = $db->prepare('INSERT INTO commentvotes VALUES(?, ?, ?)');
-        $stmt->execute(array($comm_id,$username,$positive));
+        $stmt->execute(array($com_id,$username,$positive));
         die(json_encode('new_vote'));
     }
         
     if($vote['positive']==$positive){
         $stmt = $db->prepare('DELETE FROM commentvotes WHERE username = ? AND commentID = ?');
-        $stmt->execute(array($username,$comm_id));
+        $stmt->execute(array($username,$com_id));
         die(json_encode('take_out'));
     }
     $stmt = $db->prepare('UPDATE commentvotes SET positive = ? WHERE username = ? AND commentID = ?');
-    $stmt->execute(array($positive,$username,$comm_id));
+    $stmt->execute(array($positive,$username,$com_id));
     echo json_encode('dif_vote');
 ?>

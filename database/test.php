@@ -1,8 +1,5 @@
 <?php
-
 $dbh = new PDO('sqlite:../database/database.db');
-
-
 $stmt = $dbh->prepare('SELECT * FROM users');
 $stmt->execute();
 $result = $stmt->fetchAll();
@@ -13,10 +10,9 @@ foreach ($result as $row) {
     echo $row['email'], "|";
     echo $row['description'], "|";
     echo $row['dateofbirth'], "|";
-    echo $row['dataRegistered'], " ";
+    echo $row['dataRegistered'], "<br>";
 }
-
-echo "  ";
+echo "<br><br>";
 $stmt = $dbh->prepare('SELECT * FROM posts');
 $stmt->execute();
 $result = $stmt->fetchAll();
@@ -26,10 +22,9 @@ foreach ($result as $row) {
     echo $row['content'], "|";
     echo $row['type'], "|";
     echo $row['dateWritten'], "|";
-    echo $row['username'], " ";
+    echo $row['username'], "<br>";
 }
-
-echo "  ";
+echo "<br><br>";
 $stmt = $dbh->prepare('SELECT * FROM comments');
 $stmt->execute();
 $result = $stmt->fetchAll();
@@ -39,27 +34,25 @@ foreach ($result as $row) {
     echo $row['dateWritten'], "|";
     echo $row['postID'], "|";
     echo $row['username'], "|";
-    echo $row['fatherID'], " ";
+    echo $row['fatherID'], "<br>";
 }
-
-
- /*echo "  ";	 echo "  ";
+ echo "<br><br>";	 echo "<br><br>";
  $stmt = $dbh->prepare('SELECT * FROM votes');	 $stmt = $dbh->prepare('SELECT * FROM commentvotes');
  $stmt->execute();	 $stmt->execute();
- $result = $stmt->fetchAll();	 $result = $stmt->fetchAll();
- foreach ($result as $row) {	 foreach ($result as $row) {
-     echo $row['commentID'], "|";	     echo $row['commentID'], "|";
-     echo $row['username'], "|";	     echo $row['username'], "|";
-     echo $row['positive'], " ";	     echo $row['positive'], " ";
- }	 }
- */	 
- echo "  ";
+ $result = $stmt->fetchAll();
+ foreach ($result as $row) {
+     echo $row['commentID'], "|";
+     echo $row['username'], "|";
+     echo $row['positive'], "<br>";	
+ }
+
+ echo "<br><br>";
  $stmt = $dbh->prepare('SELECT * FROM postvotes');
  $stmt->execute();
  $result = $stmt->fetchAll();
  foreach ($result as $row) {
      echo $row['postID'], "|";
      echo $row['username'], "|";
-     echo $row['positive'], " ";
+     echo $row['positive'], "<br>";
  }
  
