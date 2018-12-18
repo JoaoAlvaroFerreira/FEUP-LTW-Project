@@ -60,8 +60,8 @@ function draw_users(){
    
     
     $sortType = "points";
-if(isset($_GET['sort']))
-    $sortType = $_GET['sort'];
+if(isset(htmlspecialchars($_GET['sort'])))
+    $sortType = htmlspecialchars($_GET['sort']);
 
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM users');

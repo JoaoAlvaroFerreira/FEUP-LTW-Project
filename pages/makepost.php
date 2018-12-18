@@ -17,6 +17,7 @@ draw_footer();
             <input type="radio" name="type" value="text" checked="checked"> Text
             <input type="radio" name="type" value="video"> YouTube
             <textarea name="content" placeholder="Write your post or paste your url here" form="userpost" rows="20" cols="100"></textarea> 
+            Channel: <input type ="text" placeholder="Write the name of the channel that you'll post this story to" value="channel">
             <input type="submit" value="Submit" form="userpost">
             <input type="reset" form="userpost">
         </form>

@@ -8,8 +8,8 @@ include_once "../templates/post.php";
 
 
 $search = htmlspecialchars($_GET['search']);
-$type = $_GET['Type'];
-$sort = $_GET['Sort'];
+$type = htmlspecialchars($_GET['Type']);
+$sort = htmlspecialchars($_GET['Sort']);
 
 draw_header();
 if($type == "Users")
@@ -177,10 +177,11 @@ function draw_comments_search($search,$sort){
     <div id = "usercommentlist">
         <?php echo $votes;?> | <?php echo $row['content'];?> on 
         <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $post['title'];?></a> at <?php echo $row['dateWritten'];?>
-    
-        
-        </div> </div> <?php
+        </div> 
+    </div> 
+<?php
    
     }
     
 }
+?>

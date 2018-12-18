@@ -39,6 +39,9 @@
             </ul>
         </li>
         <li>
+            <a href="../pages/viewChannels.php">Channels</a>
+        </li>
+        <li>
             <a href="#">Settings</a>
             <ul>
                
@@ -68,13 +71,34 @@
       <button type="submit">Go!</button>
     </form>
   </div>
+        
+        <form>
+<input type="text" size="30" placeholder="Channel Search..." onkeyup="draw_channel_search(this.value)">
+<div id="channelsearch"></div>
+</form>
 </nav>
            
-        <?php draw_register();
-                              draw_login();
+        
+        <?php   
+                draw_register();
+                draw_login();
          ?>
         
         <script>
+
+var containerreg = document.getElementById('register');
+var containerlog = document.getElementById('login');        
+
+window.onclick = function(event) {
+    if (event.target == containerreg || event.target == containerlog) {
+        containerreg.style.display = "none";
+        containerlog.style.display = "none";
+    }
+}
+</script>
+    </header>
+   
+     
 
 var containerreg = document.getElementById('register');
 var containerlog = document.getElementById('login');        
@@ -172,7 +196,31 @@ function dragElement(elmnt) {
 }
 }</script>
     
-
+ <script>
+function draw_channel_search(str) {
+    
+  if (str.length==0) { 
+    document.getElementById("channelsearch").innerHTML="";
+    document.getElementById("channelsearch").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("channelsearch").innerHTML=this.responseText;
+      document.getElementById("channelsearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","channelsearch.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
+    
 <?php } 
      
     
