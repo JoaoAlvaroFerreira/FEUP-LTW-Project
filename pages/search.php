@@ -7,17 +7,17 @@ include_once "../templates/post.php";
 
 
 
-$search = htmlspecialchars($_POST['search']);
-$type = $_POST['Type'];
-$sort = $_POST['Sort'];
+$search = htmlspecialchars($_GET['search']);
+$type = $_GET['Type'];
+$sort = $_GET['Sort'];
 
 draw_header();
-if($type == "users")
+if($type == "Users")
 draw_users_search($search, $sort);
 
-else if($type == "comments")
+else if($type == "Comments")
 draw_comments_search($search, $sort);
-else if ($type == "posts")
+else if ($type == "Posts")
 draw_posts_search($search, $sort);
 
 draw_floating_menu();
@@ -56,7 +56,7 @@ function cmpDateUsers($a, $b)
 {
    
     
-    return strcmp($a['dataRegistered'],$b['dataRegistered']);
+    return -strcmp($a['dataRegistered'],$b['dataRegistered']);
 }
 
 function cmpDate($a, $b)
@@ -73,16 +73,16 @@ function draw_users_search($search, $sort){
     
 
     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM users WHERE username LIKE ? OR description LIKE ?');
+    $stmt = $db->prepare('SELECT * FROM users WHERE username LIKE ?');
     
-    $stmt->execute(array($search,$search));
+    $stmt->execute(array('%'.$search.'%'));
     $result = $stmt->fetchAll();
    
     
-     if($sortType == "votes")
+     if($sort== "votes")
     usort($result, "cmpPointsUsers");
     
-    else if($sortType == "date")
+    else if($sort == "new")
     usort($result, "cmpDateUsers");
     
   
@@ -92,13 +92,51 @@ function draw_users_search($search, $sort){
     $votes = getUserPoints($row['username']);?>
 
     <div id="postlist">
+        <div id="post_info">
+            <?php echo $votes?>
+            <span class="separator"> | </span>
+            <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username']?></a>
+            <?php   if($row['profileimg']!= ''){ ?>
+           
+       <img src="<?php echo $row['profileimg']; ?>" width=50 height = 50> <?php } ?>
+            <br>
+        </div>
+    </div>
+
+<?php     
+   
+    }
+    
+}
+
+
+function draw_posts_search($search,$sort){ 
+    
+   
+    $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM posts WHERE content LIKE ? OR title LIKE ?');
+    
+    $stmt->execute(array('%'.$search.'%','%'.$search.'%'));
+    $result = $stmt->fetchAll();
+    
+    if($sort == "votes")
+    usort($result, "cmpPointsPost");
+    
+    else if($sort == "new")
+    usort($result, "cmpDate");
+    
+    
+    foreach ($result as $row) {
+
+    $votes = getVotesPost($row['postID']);?>
+
+    <div id="postlist">
         <div class="votes_frontpage">
             <input type="button" value="Upvote">
             <input type="button" value="Downvote">
         </div>
         <div id="post_info">
-            <span id="votes"><?php echo $votes?></span>
-            <span class="id"><?=$row['postID']?></span>
+            <?php echo $votes?>
             <span class="separator"> | </span>
             <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
             <span class="separator">by</span>
@@ -112,4 +150,37 @@ function draw_users_search($search, $sort){
     }
     
 }
-?>
+function draw_comments_search($search,$sort){ 
+    
+   
+    $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM comments WHERE content LIKE ?');
+    
+    $stmt->execute(array('%'.$search.'%'));
+    $result = $stmt->fetchAll();
+    
+    if($sort == "votes")
+    usort($result, "cmpPointsComment");
+    
+    else if($sort == "new")
+    usort($result, "cmpDate");
+    
+    
+    foreach ($result as $row) {
+        $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM posts WHERE postID=?');
+    $stmt->execute(array($row['postID']));
+    $post = $stmt->fetch();
+
+   $votes = getVotesComment($row['commentID']);
+        ?>
+    <div id = "usercommentlist">
+        <?php echo $votes;?> | <?php echo $row['content'];?> on 
+        <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $post['title'];?></a> at <?php echo $row['dateWritten'];?>
+   <br>
+        
+        </div> </div> <?php
+   
+    }
+    
+}
