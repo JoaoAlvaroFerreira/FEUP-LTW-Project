@@ -75,6 +75,7 @@ if(isset($_GET['sort']))
             <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
             <span class="separator">by</span>
             <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
+            <br>
         </div>
     </div>
 

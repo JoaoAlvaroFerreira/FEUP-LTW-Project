@@ -7,7 +7,7 @@
     $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
     $stmt->execute(array($username));
     $user = $stmt->fetch();
-    return $user !== false && password_verify($password, $user['passw']);
+    return password_verify($password, $user['passw']);
   }
 
   function insertUser($username, $password, $email) {
@@ -28,19 +28,34 @@
   }
 
 
-    function editProfileInfo($username,$password,$profileimg,$email,$description,$dateofbirth, $oldusername){
+function editProfileInfo($username,$password,$profileimg,$email,$description,$dateofbirth, $newpassword){
+
+    if(checkPassword($username,$password)){
         
-        if(checkPassword($oldusername,$password)){
-  
-            
+    if($newpassword != ''){
         $db = Database::getInstance()->db();
-        $statement = $db->prepare('UPDATE users SET username = ?, passw = ? , profileimg= ?, email= ?, description= ?, dateofbirth=? WHERE username = ?');
-            
-   $options = ['cost' => 12];
-    $statement->execute(array($username,password_hash($password, PASSWORD_DEFAULT, $options),$profileimg,$email,$description,$dateofbirth,$oldusername));
-            
-            return true;
-        }
-        return false;
+         $password = $newpassword;
+        $statement = $db->prepare('UPDATE users SET passw=?, profileimg= ?, email= ?, description= ?, dateofbirth=? WHERE username = ?');
+
+$options = ['cost' => 12];
+$statement->execute(array(password_hash($password, PASSWORD_DEFAULT, $options),$profileimg,$email,$description,$dateofbirth,$username));
+       
     }
+        
+        else{
+           $db = Database::getInstance()->db(); 
+    $statement = $db->prepare('UPDATE users SET profileimg= ?, email= ?, description= ?, dateofbirth=? WHERE username = ?');
+$statement->execute(array($profileimg,$email,$description,$dateofbirth,$username));
+        
+        }
+
+
+ 
+        
+         return true;
+    }
+    return false;
+}
+
+
 ?>

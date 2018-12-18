@@ -42,24 +42,24 @@ foreach ($result as $row) {
     echo $row['fatherID'], "<br>";
 }
 
-echo "<br><br>";
-$stmt = $dbh->prepare('SELECT * FROM commentvotes');
-$stmt->execute();
-$result = $stmt->fetchAll();
-foreach ($result as $row) {
-    echo $row['commentID'], "|";
-    echo $row['username'], "|";
-    echo $row['positive'], "<br>";
-}
 
-echo "<br><br>";
-$stmt = $dbh->prepare('SELECT * FROM postvotes');
-$stmt->execute();
-$result = $stmt->fetchAll();
-foreach ($result as $row) {
-    echo $row['postID'], "|";
-    echo $row['username'], "|";
-    echo $row['positive'], "<br>";
-}
-
-?>
+ /*echo "<br><br>";	 echo "<br><br>";
+ $stmt = $dbh->prepare('SELECT * FROM votes');	 $stmt = $dbh->prepare('SELECT * FROM commentvotes');
+ $stmt->execute();	 $stmt->execute();
+ $result = $stmt->fetchAll();	 $result = $stmt->fetchAll();
+ foreach ($result as $row) {	 foreach ($result as $row) {
+     echo $row['commentID'], "|";	     echo $row['commentID'], "|";
+     echo $row['username'], "|";	     echo $row['username'], "|";
+     echo $row['positive'], "<br>";	     echo $row['positive'], "<br>";
+ }	 }
+ */	 
+ echo "<br><br>";
+ $stmt = $dbh->prepare('SELECT * FROM postvotes');
+ $stmt->execute();
+ $result = $stmt->fetchAll();
+ foreach ($result as $row) {
+     echo $row['postID'], "|";
+     echo $row['username'], "|";
+     echo $row['positive'], "<br>";
+ }
+ 

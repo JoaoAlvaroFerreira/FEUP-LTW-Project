@@ -10,8 +10,10 @@ draw_header();
 $username = $_GET['username'];
 draw_user_info($username);
 draw_user_posts($username);
+draw_user_comments($username);
 draw_floating_menu();
+draw_footer();
 
-
+    
 
 ?>

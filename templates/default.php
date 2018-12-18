@@ -11,29 +11,36 @@
     <meta charset="utf-8">
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" href="..//pages/images/fire_icon.png">
+    <link rel="icon" href="..//pages/images/rocket_icon.png">
     <script src="../js/script.js" defer></script>
 </head>
 
 <body>
     <header id="logo_tabmenu">       
-    <div id="logo"><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
+    <div><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
     <nav class="nav">
     <ul>
         <li>
-            <a href="#">About</a></li>
+            <a href="#">Users</a>
+        <ul>
+                <li><a href="../pages/userlist.php?sort=points">Sort by Points</a></li>
+                <li><a href="../pages/userlist.php?sort=name">Sort by Name</a></li>
+                <li><a href="../pages/userlist.php?sort=date">Sort by Date of Registry</a></li>
+                <li><a href="../pages/userlist.php?sort=posts">Sort by Posts</a></li>
+                <li><a href="../pages/userlist.php?sort=comments">Sort by Comments</a></li>
+        </ul>
+            </li>
         <li>
-            <a href="#">Sort By</a>
+            <a href="#">Stories</a>
             <ul>
-                <li><a href="../pages/frontpage.php?sort=points">Most Voted</a></li>
-                <li><a href="../pages/frontpage.php?sort=new">Most Recent</a></li>
-                <li><a href="../pages/frontpage.php?sort=comments">Most Comments</a></li>
+                <li><a href="../pages/frontpage.php?sort=points">Sort by Points</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Sort by New</a></li>
+                <li><a href="../pages/frontpage.php?sort=comments">Sort by Comments</a></li>
             </ul>
         </li>
         <li>
-            <a href="#">User</a>
+            <a href="#">Settings</a>
             <ul>
-                <li><a href="#">User List</a></li>
                
                 <?php if(isset($_SESSION['username'])){ ?>
                <li><a href="../pages/viewProfile.php?username=<?php echo $_SESSION['username']?>">Your Profile</a></li>
@@ -45,11 +52,42 @@
             </ul>
         </li>
     </ul>
+        
+        <div class="search-container">
+    <form action="../pages/search.php">
+      <input type="text" placeholder="Search.." name="search">
+        <select name="Type" >
+    <option value="Posts">Posts</option>
+    <option value="Comments">Comments</option>
+    <option value="Users">Users</option>
+  </select>
+        <select name="Sort">
+    <option value="new">New</option>
+    <option value="votes">Votes</option>
+  </select>
+      <button type="submit">Go!</button>
+    </form>
+  </div>
 </nav>
-           
+        
+        
+        
         <?php draw_login();
             draw_register();?>
     </header>
+   
+     
+
+<?php 
+                                            
+                                       
+
+    
+?>
+
+
+    
+
 
 <?php } ?>
     
@@ -61,16 +99,28 @@
        <div id="floatingmenu"><div id ="floatingmenuheader"><h5>Hello <?php if (isset($_SESSION['username']))    
     echo $_SESSION['username'];
            else echo "Guest, you need to log in to make a post or comment";?>!</h5>
-           <?php if (isset($_SESSION['username']))    { ?>
-           <a href="../pages/makepost.php">Make your own post</a> 
+           <?php if (isset($_SESSION['username']))    {
+               
+     $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
+    $stmt->execute(array($_SESSION['username']));
+    $result = $stmt->fetch();
+               
+             if($result['profileimg']!= ''){?>
+           
+       <p><img src="<?php echo $result['profileimg']; ?>" width=50 height = 50></p>  <?php
+                                                   }?>
+           <a href="../pages/makepost.php">Make your own post</a>
+            <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p>
+                      
+
            <h5><?php }if (isset($_SESSION['message']))
             echo $_SESSION['message'];
                     
                                       unset($_SESSION['message']);
-                ?></h5></div></div>
-   <?php 
-
-?>
+                ?></h5>
+           </div></div>
+ 
 <script>
     // Make the DIV element draggable:
 window.onload = function(){
@@ -119,11 +169,16 @@ function dragElement(elmnt) {
   }
 }
 }</script>
+    
 
-<?php} function draw_footer() { ?>
+<?php } 
+    
+    
+    
+function draw_footer() { ?>
 
 <div class="footer">
-  <span>Copyright &#169; João Álvaro Ferreira | João Pedro Fidalgo | Simão Santos | 2018 | LTW</span>
+  <p>Copyright &#169; João Álvaro Ferreira | João Pedro Fidalgo | Simão Santos | 2018 | LTW</p>
 </div>
 
 
@@ -132,6 +187,7 @@ function dragElement(elmnt) {
 
 <?php
 }
+    
 ?>
 
     

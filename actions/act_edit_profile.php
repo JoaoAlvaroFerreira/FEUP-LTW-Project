@@ -3,23 +3,22 @@
   include_once ('../database/session.php');
   
 
-$username = htmlspecialchars($_POST['username']);
 $password = htmlspecialchars($_POST['password']);
+$newpassword = htmlspecialchars($_POST['newpassword']);
 $profileimg = htmlspecialchars($_POST['profileimg']);
 $email = htmlspecialchars($_POST['email']);
 $description = htmlspecialchars($_POST['description']);
 $dateofbirth = htmlspecialchars($_POST['dateofbirth']);
-$oldusername = $_SESSION['username'];
+$username = $_SESSION['username'];
 
 
 
 if(strlen($password) > 6){
   try{
-      if(editProfileInfo($username,$password, $profileimg, $email,$description,$dateofbirth,$oldusername)){
-    $_SESSION['username'] = $username;
+      if(editProfileInfo($username,$password, $profileimg, $email,$description,$dateofbirth,$newpassword)){
     $_SESSION['message'] = 'Edited profile succesfully!';
       }
-      else $_SESSION['message'] = 'That e-mail and/or username are already taken!';
+      else $_SESSION['message'] = 'Editing failed';
   }catch (PDOException $e) {
    $_SESSION['message'] = 'Issues with database';
 
