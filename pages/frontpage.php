@@ -68,7 +68,7 @@ if(isset($_GET['sort']))
         </div>
         <div id="post_info">
             <span id="votes"><?php echo $votes?></span>
-            <span class="post_id"><?=$row['postID']?></span>
+            <span class="id"><?=$row['postID']?></span>
             <span class="separator"> | </span>
             <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
             <span class="separator">by</span>
