@@ -97,7 +97,7 @@ if(isset($_GET['sort']))
             <?php   if($row['profileimg']!= ''){ ?>
            
        <img src="<?php echo $row['profileimg']; ?>" width=50 height = 50> <?php } ?>
-            <br>
+             
         </div>
     </div>
 

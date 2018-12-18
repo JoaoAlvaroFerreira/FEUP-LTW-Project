@@ -99,7 +99,7 @@ function draw_users_search($search, $sort){
             <?php   if($row['profileimg']!= ''){ ?>
            
        <img src="<?php echo $row['profileimg']; ?>" width=50 height = 50> <?php } ?>
-            <br>
+             
         </div>
     </div>
 
@@ -141,7 +141,7 @@ function draw_posts_search($search,$sort){
             <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
             <span class="separator">by</span>
             <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
-            <br>
+             
         </div>
     </div>
 
@@ -177,7 +177,7 @@ function draw_comments_search($search,$sort){
     <div id = "usercommentlist">
         <?php echo $votes;?> | <?php echo $row['content'];?> on 
         <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $post['title'];?></a> at <?php echo $row['dateWritten'];?>
-   <br>
+    
         
         </div> </div> <?php
    

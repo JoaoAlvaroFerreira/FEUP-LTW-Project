@@ -87,18 +87,6 @@ window.onclick = function(event) {
 }
 </script>
     </header>
-   
-     
-
-<?php 
-                                            
-                                       
-
-    
-?>
-    
-
-    
 
 
 <?php } ?>
@@ -106,7 +94,7 @@ window.onclick = function(event) {
 
 <?php function draw_floating_menu() { 
 
-     ?>
+?>
         
        <div id="floatingmenu"><div id ="floatingmenuheader"><h5>Hello <?php if (isset($_SESSION['username']))    
     echo $_SESSION['username'];
@@ -120,18 +108,20 @@ window.onclick = function(event) {
                
              if($result['profileimg']!= ''){?>
            
-       <p><img src="<?php echo $result['profileimg']; ?>" width=50 height = 50></p>  <?php
-                                                   }?>
+       <p><img src="<?php echo $result['profileimg']; ?>" width=50 height = 50></p>
+ <?php } ?>
           <div id = "floatingmessage"> <a href="../pages/makepost.php">Make your own post</a>
-           <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p></div>
+           <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p>
+        </div>
                       
 
            <h5><?php }if (isset($_SESSION['message']))
             echo $_SESSION['message'];
                     
-                                      unset($_SESSION['message']);
+            unset($_SESSION['message']);
                 ?></h5>
-           </div></div>
+           </div>
+        </div>
  
 <script>
     // Make the DIV element draggable:
@@ -184,18 +174,13 @@ function dragElement(elmnt) {
     
 
 <?php } 
-    
-    
+     
     
 function draw_footer() { ?>
 
 <div class="footer">
   <p>Copyright &#169; João Álvaro Ferreira | João Pedro Fidalgo | Simão Santos | 2018 | LTW</p>
 </div>
-
-
-    
-
 
 <?php
 }

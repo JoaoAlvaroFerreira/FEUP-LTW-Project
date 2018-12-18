@@ -26,16 +26,16 @@ function draw_post($id){
         <input type="button" value="Upvote">
         <input type="button" value="Downvote">
       </div>
-        <span class="id"><?=$id?></span>
+        <span class="post_id"><?=$id?></span>
         <div class = "post_title">
           <?php echo $result['title']; ?>
         </div>
       </div>
-      <span id="votes"><?php echo $votes?></span>
-      <div class = "post_content">       
-        <?php echo $result['content']; ?>
+      <span id="votes"><?php echo $votes?> Vote(s)</span>
+       <div class = "post_content">       
+         <?php echo $result['content']; ?>
       </div>
-    <br>
+     
 <?php
     }
     
@@ -45,14 +45,14 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div> 
-    <span class="id"><?=$id?></span>
+    <span class="post_id"><?=$id?></span>
             <div class="post_title">
               <?php echo $result['title']; ?>
             </div>
           </div>
-          <span id="votes"><?php echo $votes?></span>
+          <span id="votes"><?php echo $votes?> Vote(s)</span>
           <div class = "post_image">
-            <img src="<?php echo $result['content'] ?>"><br>
+            <img src="<?php echo $result['content'] ?>"> 
           </div>
 <?php 
   }
@@ -63,12 +63,13 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div>
-    <span class="id"><?=$id?></span>
+    <span class="post_id"><?=$id?></span>
     <div class="post_title">
-        <a href="<?php echo $result['content'];?>"> <?php echo $result['title'] ?></a>
+        <a href="<?php echo $result['content'];?>"> 
+        <?php echo $result['title'] ?></a>
     </div>
   </div>
-  <span id="votes"><?php echo $votes?></span>
+  <span id="votes"><?php echo $votes?> Vote(s)</span>
      
 <?php
     }
@@ -79,12 +80,12 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div>
-    <span class="id"><?=$id?></span>
+    <span class="post_id"><?=$id?></span>
       <div class = "post_title">
         <?php echo $result['title']; ?>
       </div>
     </div>
-    <span id="votes"> <?php echo $votes?></span>
+    <span id="votes"> <?php echo $votes?> Vote(s)</span>
     <div id="post_video">
 <?php //não tocar nisto, é para ler videos de youtube
     $url = $result['content'];
@@ -104,10 +105,11 @@ function draw_post($id){
     $stmt->execute(array($result['username']));
     $user = $stmt->fetch();
     
-    echo $result['username'];?></a> <?php   if($user['profileimg']!= ''){ ?>
-           
-       <img src="<?php echo $user['profileimg']; ?>" width=50 height = 50>  <?php
-                                                   } ?>
+    echo $result['username'];?></a> <?php   
+      if($user['profileimg']!= ''){ ?> 
+       <img src="<?php echo $user['profileimg']; ?>" width=50 height = 50>  
+  <?php
+} ?>
     
     
     on <?php echo $result['dateWritten'];
@@ -128,7 +130,7 @@ function draw_post($id){
    <center><h2>Are you sure? You won't be able to get your post back.</h2>
        
        <form class="editform" method="post" action="../actions/act_delete_post.php">
-        <input type="hidden" name="id" value=<?php echo $result['postID'];?> >
+        <input type="hidden" name="post_id" value=<?php echo $result['postID'];?> >
         <input type="submit" value="Yes"/>
        </form> </center>
         </div>
@@ -236,7 +238,7 @@ function draw_comments($postID, $fatherID, $level){
                 +
         <?php        }     ?>
     
-    <div id ="comment_votes">
+    <div id="comment_votes">
     <input type="button" value="Upvote">
     <input type="button" value="Downvote">
     </div>
@@ -275,7 +277,7 @@ function draw_comments($postID, $fatherID, $level){
    <center><h2>Are you sure? You won't be able to get your comment back.</h2>
        
        <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
-        <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
+        <input type="hidden" name="post_id" value="<?php echo $row['commentID'];?>" >
         <input type="submit" value="Yes"/>
        </form> </center>
         </div>
