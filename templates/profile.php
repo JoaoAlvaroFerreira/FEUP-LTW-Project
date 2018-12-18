@@ -89,15 +89,18 @@ function draw_user_posts($username){
     }
     else{ 
 ?>
-    <div class = "userposts"> 
-    <h3>Posts made by this user:</h3>
+    <div> 
+    <h3  class = "userposts">Posts made by this user:</h3>
 <?php
     foreach ($result as $row){ 
     $votes = getVotesPost($row['postID']);
 ?>
-    <div id = "userpostlist">
-        <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>">
-        <?php echo $votes;?> | <?php echo $row['title'];?> on <?php echo $row['dateWritten'];?></a>
+    <div id = "userpostlist" class="userposts1">
+        <span id="votes"><?php echo $votes?></span>
+        <span class="separator"> | </span>
+        <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
+        <span class="separator">on</span>
+        <?php echo $row['dateWritten']?>
     </div> 
     </div> 
 <?php
@@ -118,7 +121,8 @@ function draw_user_comments($username){
         ?><h4 class = "userposts">This user hasn't made any comments</h4><?php
     }else{ ?>
     
-    <div id = "usercomments" class = "userposts"> <h4>Comments made by this user:</h4>
+    <div id = "usercomments"> 
+        <h4 class = "userposts">Comments made by this user:</h4>
     <?php
     foreach ($result as $row){ 
         $db = Database::getInstance()->db();
@@ -128,7 +132,7 @@ function draw_user_comments($username){
         
     $votes = getVotesComment($row['commentID']);
         ?>
-    <div id = "usercommentlist" class = "userposts">
+    <div id = "usercommentlist" class = "userposts1">
         <?php echo $votes;?> | <?php echo $row['content'];?> on 
         <a href = "../pages/viewPost.php?id=<?php echo $post['postID'];?>"><?php echo $post['title'];?></a> at <?php echo $row['dateWritten'];?>
     

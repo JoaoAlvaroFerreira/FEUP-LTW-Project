@@ -641,3 +641,8 @@ input[type=text], input[type=password] {
 .userposts {
     margin: 1em;
 }
+
+.userposts1 {
+    margin: 1em;
+    margin-left: 2em;
+}
