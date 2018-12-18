@@ -11,23 +11,23 @@
     <meta charset="utf-8">
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" href="..//pages/images/rocket_icon.png">
+    <link rel="icon" href="..//pages/images/fire_icon.png">
     <script src="../js/script.js" defer></script>
 </head>
 
 <body>
     <header id="logo_tabmenu">       
-    <div><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
+    <div id="logo"><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
     <nav class="nav">
     <ul>
         <li>
             <a href="#">About</a></li>
         <li>
-            <a href="#">Stories</a>
+            <a href="#">Sort By</a>
             <ul>
-                <li><a href="../pages/frontpage.php?sort=points">Sort by Votes</a></li>
-                <li><a href="../pages/frontpage.php?sort=new">Sort by New</a></li>
-                <li><a href="../pages/frontpage.php?sort=comments">Sort by Comments</a></li>
+                <li><a href="../pages/frontpage.php?sort=points">Most Voted</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Most Recent</a></li>
+                <li><a href="../pages/frontpage.php?sort=comments">Most Comments</a></li>
             </ul>
         </li>
         <li>
@@ -47,38 +47,25 @@
     </ul>
 </nav>
         </div>
-        
-        
-        <?php draw_login();
-            draw_register();?>
-    </header>
-   
-        <?php if (isset($_SESSION['message'])) {
-        $message=$_SESSION['message'];
+        <?php 
+            draw_login();
+            draw_register();
         ?>
-       
-    <?php unset($_SESSION['message']); } ?>
-
-<?php 
-                                            
-                                       
-
-    
-?>
-
-
-    
-
-
-<?php } ?>
-    
+</header>
+    <?php if (isset($_SESSION['message'])) {
+        $message=$_SESSION['message'];
+        unset($_SESSION['message']); 
+    }
+} ?>    
 
 <?php function draw_floating_menu() { 
-
     if (isset($_SESSION['username'])){ ?>
-        
-       <div id="floating_menu"><h5>Hello <?php echo $_SESSION['username']?>!</h5>
-           <a href="../pages/makepost.php">Make your own post</a></div>
+       <div class="floating_menu">
+            <div id="floating_message">
+               Hello <?php echo $_SESSION['username']?>!
+            </div>
+            <a href="../pages/makepost.php">Make your own post!</a>
+        </div>
    <?php }
 }
 ?>
@@ -86,7 +73,7 @@
 <?php function draw_footer() { ?>
 
 <div class="footer">
-  <p>Copyright &#169; João Álvaro Ferreira | João Pedro Fidalgo | Simão Santos | 2018 | LTW</p>
+  <span>Copyright &#169; João Álvaro Ferreira | João Pedro Fidalgo | Simão Santos | 2018 | LTW</span>
 </div>
 
 </body>

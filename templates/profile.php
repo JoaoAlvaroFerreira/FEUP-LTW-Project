@@ -42,23 +42,26 @@ function draw_user_posts($username){
     $result = $stmt->fetchAll();
     
     if(empty($result)){?>
-        <h3>This user hasn't made any posts</h3><?php
+    <div class="little_title">
+        <h3>This user hasn't made any posts</h3>
+    </div>
+<?php
     }
     
     else{ ?> 
-        <div id = "userposts"> <h3>Posts made by this user:</h3>
-S<?php
+        <div id = "userposts">
+            <div class="little_title">
+                <h3>Posts made by this user:</h3>
+            </div>
+<?php
         foreach ($result as $row){ 
             $votes = getVotesPost($row['postID']);
 ?>
-    <div id = "userpostlist">
-        <div class="votes">
-            <input type="button" value="Upvote">
-            <input type="button" value="Downvote">
-        </div>
-    <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $votes;?> | <?php echo $row['title'];?></a>
-   <br>
-    </div>
+            <div id = "user_postlist">
+                <?php echo $votes?>
+                <span class="separator"> | </span>
+                <a href = "../pages/viewPost.php?id=<?php echo $row['postID'];?>"><?php echo $row['title'];?></a>
+            </div>
         </div> 
 <?php
         }

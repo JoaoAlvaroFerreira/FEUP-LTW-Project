@@ -16,8 +16,9 @@ function draw_post($id){
     
     $votes = getVotesPost($id);
 ?>
-    
-<div id = "full_post">
+  
+<section id="post_page">
+<div id="full_post">
 
 <?php
     if($result['type'] == "text"){ ?>
@@ -36,7 +37,6 @@ function draw_post($id){
       <div class = "post_content">       
         <?php echo $result['content']; ?>
       </div>
-    <br>
 <?php
     }
     
@@ -51,10 +51,10 @@ function draw_post($id){
             </div>
           </div>
           <div class="post_votes">
-            <?php echo $votes; ?>
+            <?php echo $votes; ?><span> Vote(s)</span>
           </div>
-          <div class = "post_content">
-            <img src="<?php echo $result['content'] ?>"><br>
+          <div id="post_image">
+            <img src="<?php echo $result['content'] ?>">
           </div>
 <?php 
   }
@@ -70,7 +70,7 @@ function draw_post($id){
     </div>
   </div>
       <div class="post_votes">
-        <?php echo $votes; ?>
+        <?php echo $votes; ?><span> Vote(s)</span>
       </div>
       <div class = "post_content">
         <a href="<?php echo $result['content'];?>">
@@ -83,23 +83,26 @@ function draw_post($id){
       <div class="votes">
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
-    </div>
+      </div>
       <div class = "post_title">
         <?php echo $result['title']; ?>
       </div>
     </div>
     <div class="post_votes">
-        <?php echo $votes; ?>
+        <?php echo $votes; ?><span> Vote(s)</span>
       </div>
-        
+      
+<div id="post_video">
+
 <?php //não tocar nisto, é para ler videos de youtube
     $url = $result['content'];
     parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars);
     $str = $array_of_vars['v'];
     draw_video($str);
 
-  }
+  } 
 ?>
+</div>
         
 <div id="post_footnote">
   Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>">
@@ -109,8 +112,9 @@ function draw_post($id){
 
 </div>
 
-  <?php if(isset($_SESSION['username']))
-    post_reply_box($id);
+<?php
+    if(isset($_SESSION['username']))
+      post_reply_box($id);
 
 }
 
@@ -144,41 +148,43 @@ function getCommentsPost($id){
 
 
 function draw_comments($postID, $fatherID, $level){
-    echo "<br>";
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM comments WHERE postID = ? AND fatherID = ?');
     $stmt->execute(array($postID,$fatherID));
     $result = $stmt->fetchAll();
     
-     if(empty($result))
+    if(empty($result))
         return;
      
-    
     else{
         
-    foreach($result as $row){
-         echo "<div id = 'comment'> ";
-         for ($counter = 0; $counter<$level; $counter++) {
-    echo "______";
-      }
-        ?>
-    <button type="button">Upvote</button>
-    <button type="button">Downvote</button>
+    foreach($result as $row){?>
+
+      <div id="comment">
+
+<?php for ($counter = 0; $counter<$level; $counter++) { ?>
+        +
+  <?php } ?>
+
+  <div id="comment_votes">
+        <input type="button" value="Upvote">
+        <input type="button" value="Downvote">
+  </div>
+    
 <?php
-        $votes = getVotesComment($row['postID'],$row['commentID']);
-        
-        echo $votes. " | ";
-        echo $row['content']."</div><br>";
-        
+      $votes = getVotesComment($row['postID'],$row['commentID']);  ?>
       
-        echo "Written by ".$row['username']." on " .$row['dateWritten'].".";
+      <?php echo $votes?>
+      <span class="separator"> | </span>
+      <?php echo $row['content']?>
+    </div> 
+      <?php echo "Written by ".$row['username']." on " .$row['dateWritten'].".";
         
          if(isset($_SESSION['username']))
         comment_reply_box($postID, $row['commentID']);
         
         $level = $level+1;
         draw_comments($postID, $row['commentID'],$level);
-        echo "<br>";
         $level = $level-1;
         }
         
@@ -194,7 +200,6 @@ function getVotesComment($idpost, $idcomment){
     $result = $stmt->fetchAll();
     $votes = 0;
     
-   
     foreach ($result as $row) {
    
     if($row['positive'] == 1)
@@ -256,36 +261,34 @@ function draw_video($video){?>
     </script>
 <?php }
 
-//ids iguais up ahead part 2
 
- function post_reply_box($postID) { 
-?>
-
-  <form method="post" action="../actions/act_comment.php" id = "postreply">
+ function post_reply_box($postID) { ?>
+  <form method="post" action="../actions/act_comment.php" id="post_reply">
     <input type="hidden" name="postID" value="<?php echo $postID?>">
-      <br>
-  <!--   <textarea name="content" placeholder="Write your comment here" form="postreply" rows="3" cols="40"></textarea>-->
-    <input type="text" name="content" placeholder="Write here">
-      <br>
-    <input type="submit" value="Reply" id="postreply">
-    <input type="reset" id="postreply">    
+    <!--   <textarea name="content" placeholder="Write your comment here" form="post_reply" rows="3" cols="40"></textarea>-->
+    <textarea placeholder="Write your reply here..."></textarea>
+    <div>
+      <input type="submit" value="Reply">
+      <input type="reset" value="Reset">
+    </div>
   </form>
 
 <?php } 
 
-//ids iguais up ahead
 
  function comment_reply_box($postID, $fatherID) { 
 ?>
 
-  <form method="post" action="../actions/act_comment.php" id="commentreply">
+  <form method="post" action="../actions/act_comment.php" class="comment_reply">
     <input type="hidden" name="postID" value="<?php echo $postID?>">
     <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
-  <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
-    <input type="text" name="content" placeholder="Write here">
-    <br>
-    <input type="submit" value="Reply" id="commentreply">
-    <input type="reset">
+    <!--<textarea name="content" placeholder="Write your comment here" form="comment_reply" rows="3" cols="40"></textarea>-->
+    <textarea placeholder="Write your comment here..."></textarea>
+    <div>
+      <input type="submit" value="Reply">
+      <input type="reset" value="Reset">
+    </div>
   </form>
 
 <?php }  ?>
+ </section>
