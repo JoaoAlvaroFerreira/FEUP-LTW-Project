@@ -92,13 +92,17 @@ function draw_users_search($search, $sort){
     $votes = getUserPoints($row['username']);?>
 
     <div id="postlist">
+        <div class="votes_frontpage">
+            <input type="button" value="Upvote">
+            <input type="button" value="Downvote">
+        </div>
         <div id="post_info">
-            <?php echo $votes?>
+            <span id="votes"><?php echo $votes?></span>
+            <span class="id"><?=$row['postID']?></span>
             <span class="separator"> | </span>
-            <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username']?></a>
-            <?php   if($row['profileimg']!= ''){ ?>
-           
-       <img src="<?php echo $row['profileimg']; ?>" width=50 height = 50> <?php } ?>
+            <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
+            <span class="separator">by</span>
+            <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
             <br>
         </div>
     </div>
