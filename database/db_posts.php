@@ -20,7 +20,15 @@
     return true;
     }
 
-    function sortPosts(){
+    
+
+    function deletePost($id){
+        
+    $db = Database::getInstance()->db();
+    $stmt = $db->prepare('DELETE FROM posts WHERE postID=?');
+    $stmt->execute(array($id));
+      
+    return true;
         
     }
 ?>

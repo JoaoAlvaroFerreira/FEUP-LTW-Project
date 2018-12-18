@@ -1,7 +1,6 @@
 <?php
     include_once('../database/session.php');
     include_once('../database/init.php');
-
     header('Content-Type: application/json');
     // Verify if user is logged in
     if (!isset($_SESSION['username'])){
@@ -25,9 +24,7 @@
         $stmt->execute(array($username,$post_id));
         die(json_encode('take_out'));
     }
-
     $stmt = $db->prepare('UPDATE postvotes SET positive = ? WHERE username = ? AND postID = ?');
     $stmt->execute(array($positive,$username,$post_id));
     echo json_encode('dif_vote');
-
 ?>

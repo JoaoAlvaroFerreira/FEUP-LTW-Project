@@ -1,1 +1,28 @@
-ErrorDocument 404 /csproj/pages/404.php
+ErrorDocument 404 /LTW-Project/pages/404.php
+
+# Protect the htaccess file
+<Files .htaccess>
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Protect folders
+<Files ./css>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files ./dbActions>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files ./js>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files ./pages>
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Disable directory browsing
+Options All -Indexes

@@ -8,6 +8,7 @@
        
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
+        <br>
         <center><input type="submit" value="Log In"></center>
     </form>
       </div>

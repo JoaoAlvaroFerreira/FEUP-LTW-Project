@@ -16,9 +16,8 @@ function draw_post($id){
     
     $votes = getVotesPost($id);
 ?>
-  
-<section id="post_page">
-<div id="full_post">
+    
+<div id = "full_post">
 
 <?php
     if($result['type'] == "text"){ ?>
@@ -37,6 +36,7 @@ function draw_post($id){
       <div class = "post_content">       
         <?php echo $result['content']; ?>
       </div>
+    <br>
 <?php
     }
     
@@ -51,10 +51,10 @@ function draw_post($id){
             </div>
           </div>
           <div class="post_votes">
-            <?php echo $votes; ?><span> Vote(s)</span>
+            <?php echo $votes; ?>
           </div>
-          <div id="post_image">
-            <img src="<?php echo $result['content'] ?>">
+          <div class = "post_content">
+            <img src="<?php echo $result['content'] ?>"><br>
           </div>
 <?php 
   }
@@ -66,15 +66,13 @@ function draw_post($id){
       <input type="button" value="Downvote">
     </div>
     <div class="post_title">
-        <?php echo $result['title'] ?></a>
+        <a href="<?php echo $result['content'];?>"> <?php echo $result['title'] ?></a>
     </div>
   </div>
       <div class="post_votes">
-        <?php echo $votes; ?><span> Vote(s)</span>
+        <?php echo $votes; ?>
       </div>
-      <div class = "post_content">
-        <a href="<?php echo $result['content'];?>">
-      </div>
+     
 <?php
     }
     
@@ -83,39 +81,112 @@ function draw_post($id){
       <div class="votes">
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
-      </div>
+    </div>
       <div class = "post_title">
         <?php echo $result['title']; ?>
       </div>
     </div>
     <div class="post_votes">
-        <?php echo $votes; ?><span> Vote(s)</span>
+        Vote(s):<?php echo $votes; ?>
       </div>
-      
-<div id="post_video">
-
+        
 <?php //não tocar nisto, é para ler videos de youtube
     $url = $result['content'];
     parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars);
     $str = $array_of_vars['v'];
     draw_video($str);
 
-  } 
+  }
 ?>
-</div>
         
 <div id="post_footnote">
   Posted by <a href = "../pages/viewProfile.php?username=<?php echo $result['username'];?>">
-  <?php echo $result['username'];?></a> on <?php echo $result['dateWritten'];?>
+  <?php 
+      $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
+    $stmt->execute(array($result['username']));
+    $user = $stmt->fetch();
+    
+    echo $result['username'];?></a> <?php   if($user['profileimg']!= ''){ ?>
+           
+       <img src="<?php echo $user['profileimg']; ?>" width=50 height = 50>  <?php
+                                                   } ?>
+    
+    
+    on <?php echo $result['dateWritten'];
+    
+    
+    
+    
+  if(isset($_SESSION['username'])) {
+    if($result['username'] == $_SESSION['username']){ ?>
+        <button onclick="document.getElementById('deletePost').style.display='block'">Delete Post</button>
+    <?php
+    } }
+    ?>
+    
+       
+    
+        <div id = "deletePost" class = "container">
+   <center><h2>Are you sure? You won't be able to get your post back.</h2>
+       
+       <form class="editform" method="post" action="../actions/act_delete_post.php">
+        <input type="hidden" name="id" value=<?php echo $result['postID'];?> >
+        <input type="submit" value="Yes"/>
+       </form> </center>
+        </div>
+    
+    
   <div id="comment_number"><?php echo getCommentsPost($result['postID']);?> comments</div>
 </div>
 
 </div>
 
-<?php
-    if(isset($_SESSION['username']))
-      post_reply_box($id);
+  <?php if(isset($_SESSION['username']))
+    post_reply_box($id);
 
+}
+
+function getUserPoints($username){
+     $db = Database::getInstance()->db();
+      
+    $stmt = $db->prepare('SELECT * FROM posts WHERE username = ?');
+    $stmt->execute(array($username));
+    $stories = $stmt->fetchAll();
+    $stmt = $db->prepare('SELECT * FROM comments WHERE username = ?');
+    $stmt->execute(array($username));
+    $comments = $stmt->fetchAll();
+    $points = 0;
+    
+    foreach($stories as $row){
+        $points = $points + getVotesPost($row['postID']);
+    }
+    
+     foreach($comments as $row){
+        $points = $points + getVotesComment($row['commentID']);
+    }
+    
+    return $points;
+    
+    
+}
+
+function getCommentCountUser($username){
+     $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM comments WHERE username = ?');
+    $stmt->execute(array($username));
+    $result = $stmt->fetchAll();
+   
+    return count($result);
+}
+
+function getPostCountUser($username){
+     $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM posts WHERE username = ?');
+    $stmt->execute(array($username));
+    $result = $stmt->fetchAll();
+   
+    return count($result);
 }
 
 function getVotesPost($id){
@@ -147,59 +218,65 @@ function getCommentsPost($id){
 }
 
 
+
 function draw_comments($postID, $fatherID, $level){
+    echo "<br>";
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM comments WHERE postID = ? AND fatherID = ?');
     $stmt->execute(array($postID,$fatherID));
     $result = $stmt->fetchAll();
     
-    if(empty($result))
+     if(empty($result))
         return;
      
+    
     else{
         
-    foreach($result as $row){?>
-
-      <div id="comment">
-
-<?php for ($counter = 0; $counter<$level; $counter++) { ?>
-        +
-  <?php } ?>
-
-  <div id="comment_votes">
-        <input type="button" value="Upvote">
-        <input type="button" value="Downvote">
-  </div>
-    
-<?php
-      $votes = getVotesComment($row['postID'],$row['commentID']);  ?>
+    foreach($result as $row){
+        ?> <div id = 'comment'> 
+      <?php
+      for($count = 0; $count < $level; $count++){
+                echo "___";     
+                                      }
+        ?>
+    <button type="button">Upvote</button>
+    <button type="button">Downvote</button>
       
-      <?php echo $votes?>
-      <span class="separator"> | </span>
-      <?php echo $row['content']?>
-    </div> 
-      <?php echo "Written by ".$row['username']." on " .$row['dateWritten'].".";
+<?php
+        $votes = getVotesComment($row['commentID']); 
+        ?>
+     <?php echo $votes;?> | 
+       <?php echo $row['content']?><br>
+        
+      
+      <div id = 'commentfootnote'>Written by <?php echo $row['username']?> on <?php echo $row['dateWritten']?> </div>
+
+<?php
         
          if(isset($_SESSION['username']))
         comment_reply_box($postID, $row['commentID']);
         
+        
         $level = $level+1;
         draw_comments($postID, $row['commentID'],$level);
         $level = $level-1;
+        ?>
+</div> <?php
         }
         
     }
 }
 
 
-function getVotesComment($idpost, $idcomment){
+function getVotesComment($idcomment){
     
     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM commentvotes WHERE commentId = ?');
+    $stmt = $db->prepare('SELECT * FROM commentvotes WHERE commentID = ?');
     $stmt->execute(array($idcomment));
     $result = $stmt->fetchAll();
     $votes = 0;
     
+   
     foreach ($result as $row) {
    
     if($row['positive'] == 1)
@@ -261,35 +338,37 @@ function draw_video($video){?>
     </script>
 <?php }
 
+//ids iguais up ahead part 2
 
- function post_reply_box($postID) { ?>
-  <form method="post" action="../actions/act_comment.php" id="post_reply">
+ function post_reply_box($postID) { 
+?>
+
+  <form method="post" action="../actions/act_comment.php" id = "postreply">
     <input type="hidden" name="postID" value="<?php echo $postID?>">
-    <!--   <textarea name="content" placeholder="Write your comment here" form="post_reply" rows="3" cols="40"></textarea>-->
-    <textarea placeholder="Write your reply here..."></textarea>
-    <div>
-      <input type="submit" value="Reply">
-      <input type="reset" value="Reset">
-    </div>
+      <br>
+  <!--   <textarea name="content" placeholder="Write your comment here" form="postreply" rows="3" cols="40"></textarea>-->
+    <input type="text" name="content" placeholder="Write here">
+      <br>
+    <input type="submit" value="Reply" id="postreply">
+    <input type="reset" id="postreply">    
   </form>
 
 <?php } 
 
+//ids iguais up ahead
 
  function comment_reply_box($postID, $fatherID) { 
 ?>
    
 
-  <form method="post" action="../actions/act_comment.php" class="comment_reply">
+  <form method="post" action="../actions/act_comment.php"  id="commentreply">
     <input type="hidden" name="postID" value="<?php echo $postID?>">
     <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
-    <!--<textarea name="content" placeholder="Write your comment here" form="comment_reply" rows="3" cols="40"></textarea>-->
-    <textarea placeholder="Write your comment here..."></textarea>
-    <div>
-      <input type="submit" value="Reply">
-      <input type="reset" value="Reset">
-    </div>
+  <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
+    <input type="text" name="content" placeholder="Write here">
+    <br>
+    <input type="submit" value="Reply" id="commentreply">
+    <input type="reset">
   </form>
 
 <?php }  ?>
- </section>
