@@ -56,21 +56,21 @@
         </li>
     </ul>
         
-        <div class="search-container">
+    <div class="search-container">
     <form action="../pages/search.php">
-      <input type="text" placeholder="Search.." name="search">
+        <input type="text" placeholder="Search.." name="search">
         <select name="Type" >
-    <option value="Posts">Stories</option>
-    <option value="Comments">Comments</option>
-    <option value="Users">Users</option>
-  </select>
+            <option value="Posts">Stories</option>
+            <option value="Comments">Comments</option>
+            <option value="Users">Users</option>
+        </select>
         <select name="Sort">
-    <option value="new">New</option>
-    <option value="votes">Votes</option>
-  </select>
-      <button type="submit">Go!</button>
+            <option value="new">New</option>
+            <option value="votes">Votes</option>
+        </select>
+        <button type="submit">Go!</button>
     </form>
-  </div>
+    </div>
         
         <form>
         <div id="channelsearch">

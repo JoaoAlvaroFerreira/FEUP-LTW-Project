@@ -501,7 +501,7 @@ input[type=text], input[type=password] {
     width: 30%;
 }
 
-#post_reply input[type="submit"], #post_reply input[type="reset"], #comment_reply input[type="submit"], #comment_reply input[type="reset"]{
+#post_reply input[type="submit"], #post_reply input[type="reset"], .comment_reply input[type="submit"], .comment_reply input[type="reset"]{
     margin: 1em;
     margin-top: -1em;
 
@@ -514,7 +514,7 @@ input[type=text], input[type=password] {
     font-size: 110%;
 }
 
-#post_reply input[type="submit"]:hover, #post_reply input[type="reset"]:hover, #comment_reply input[type="submit"], #comment_reply input[type="reset"]{
+#post_reply input[type="submit"]:hover, #post_reply input[type="reset"]:hover, .comment_reply input[type="submit"], .comment_reply input[type="reset"]{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -556,7 +556,7 @@ input[type=text], input[type=password] {
 }
 
 #post_delete_button:hover, #comment_delete_button:hover {
- box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 #comment_content {
     box-sizing: content-box;
@@ -598,6 +598,11 @@ input[type=text], input[type=password] {
     margin: 1em;
 }
 
-#content_form {
+#content_form input[type="radio"]{
+    cursor: pointer;
+    border-radius: 50%;
+}
 
+#commentfootnote {
+    margin: 1em;
 }
