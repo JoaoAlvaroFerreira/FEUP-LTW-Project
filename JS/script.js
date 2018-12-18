@@ -6,7 +6,6 @@ let votesCom = document.querySelectorAll('span[id=votesCom]');
 let upvoteCom = document.querySelectorAll('div[id=comment_votes] input[value=Upvote]');
 let downvoteCom = document.querySelectorAll('div[id=comment_votes] input[value=Downvote]');
 let idCom = document.querySelectorAll('span[class=commentid]');
-console.log(upvote);
 let number;
 for(let i=0;i<upvoteCom.length;i++){
   upvoteCom[i].addEventListener('click', function() {
