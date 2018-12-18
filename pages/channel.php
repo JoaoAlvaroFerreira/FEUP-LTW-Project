@@ -7,14 +7,13 @@ include_once "../templates/post.php";
 
 
 
-
-
 draw_header();
-draw_posts();
+draw_posts_channel();
 draw_floating_menu();
 draw_footer();
 
-    
+
+
 function cmpPoints($a, $b)
 {
     if (getVotesPost($a['postID']) == getVotesPost($b['postID'])) {
@@ -38,17 +37,20 @@ function cmpDate($a, $b)
     return -strcmp($a['dateWritten'],$b['dateWritten']);
 }
 
-
-function draw_posts(){ 
+function draw_posts_channel(){ 
     
-    $sortType = "points";
+    
+
+$channel = htmlspecialchars($_GET['id']);
+    
+    $sortType = 'points';
 if(isset($_GET['sort']))
     $sortType = htmlspecialchars($_GET['sort']);
 
     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM posts');
+    $stmt = $db->prepare('SELECT * FROM posts WHERE channel = ?');
     
-    $stmt->execute();
+    $stmt->execute(array($channel));
     $result = $stmt->fetchAll();
     
     if($sortType == "points")
@@ -76,11 +78,6 @@ if(isset($_GET['sort']))
             <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
             <span class="separator">by</span>
             <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username'];?></a>
-            <span class="separator">on</span>
-            <?php echo $row['dateWritten']?>
-            <span class="separator">on the </span>
-             <a href = "../pages/channel.php?id=<?php echo $row['channel']?>"><?php echo $row['channel'];?></a>
-            <span class="channel">channel.</span>
             <br>
         </div>
     </div>

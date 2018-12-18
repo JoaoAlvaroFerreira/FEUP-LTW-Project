@@ -8,25 +8,12 @@
        
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
-        <br>
         <center><input type="submit" value="Log In"></center>
     </form>
       </div>
 
 
-     <script>
-
-var container = document.getElementById('login');
-        
-
-window.onclick = function(event) {
-    
-   
-    if (event.target == container) {
-        container.style.display = "none";
-    }
-}
-</script>
+  
         
 
 <?php } ?>
@@ -45,16 +32,7 @@ window.onclick = function(event) {
 
   </div>
 
-     <script>
-
-var container = document.getElementById('register');
-
-window.onclick = function(event) {
-    if (event.target == container) {
-        container.style.display = "none";
-    }
-}
-</script>
+     
 
 <?php } ?>
 

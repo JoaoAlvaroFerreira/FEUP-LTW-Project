@@ -11,13 +11,13 @@
     <meta charset="utf-8">
     <title>RocketBoost</title>
     <link href="../css/style.css" rel="stylesheet">
-    <link rel="icon" href="..//pages/images/rocket_icon.png">
+<link rel="icon" href="..//pages/images/fire_icon.png">
     <script src="../JS/script.js" defer></script>
 </head>
 
 <body>
     <header id="logo_tabmenu">       
-    <div><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
+   <div id="logo"><a href="../pages/frontpage.php"><img src="images/logo.png" alt="A rocket, site icon"></a></div>
     <nav class="nav">
     <ul>
         <li>
@@ -33,10 +33,13 @@
         <li>
             <a href="#">Stories</a>
             <ul>
-                <li><a href="../pages/frontpage.php?sort=points">Sort by Points</a></li>
-                <li><a href="../pages/frontpage.php?sort=new">Sort by New</a></li>
-                <li><a href="../pages/frontpage.php?sort=comments">Sort by Comments</a></li>
+                <li><a href="../pages/frontpage.php?sort=points">Most Voted</a></li>
+                <li><a href="../pages/frontpage.php?sort=new">Most Recent</a></li>
+                <li><a href="../pages/frontpage.php?sort=comments">Most Comments</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="../pages/viewChannels.php">Channels</a>
         </li>
         <li>
             <a href="#">Settings</a>
@@ -57,7 +60,7 @@
     <form action="../pages/search.php">
       <input type="text" placeholder="Search.." name="search">
         <select name="Type" >
-    <option value="Posts">Posts</option>
+    <option value="Posts">Stories</option>
     <option value="Comments">Comments</option>
     <option value="Users">Users</option>
   </select>
@@ -68,12 +71,31 @@
       <button type="submit">Go!</button>
     </form>
   </div>
+        
+        <form>
+<input type="text" size="30" placeholder="Channel Search..." onkeyup="draw_channel_search(this.value)">
+<div id="channelsearch"></div>
+</form>
 </nav>
+           
         
+        <?php   
+                draw_register();
+                draw_login();
+         ?>
         
-        
-        <?php draw_login();
-            draw_register();?>
+        <script>
+
+var containerreg = document.getElementById('register');
+var containerlog = document.getElementById('login');        
+
+window.onclick = function(event) {
+    if (event.target == containerreg || event.target == containerlog) {
+        containerreg.style.display = "none";
+        containerlog.style.display = "none";
+    }
+}
+</script>
     </header>
    
      
@@ -84,7 +106,7 @@
 
     
 ?>
-
+    
 
     
 
@@ -110,8 +132,8 @@
            
        <p><img src="<?php echo $result['profileimg']; ?>" width=50 height = 50></p>  <?php
                                                    }?>
-           <a href="../pages/makepost.php">Make your own post</a>
-            <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p>
+          <div id = "floatingmessage"> <a href="../pages/makepost.php">Make your own post</a>
+           <p>Your User Points:  <?php echo getUserPoints($_SESSION['username']); ?></p></div>
                       
 
            <h5><?php }if (isset($_SESSION['message']))
@@ -170,9 +192,34 @@ function dragElement(elmnt) {
 }
 }</script>
     
-
+ <script>
+function draw_channel_search(str) {
+    
+  if (str.length==0) { 
+    document.getElementById("channelsearch").innerHTML="";
+    document.getElementById("channelsearch").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("channelsearch").innerHTML=this.responseText;
+      document.getElementById("channelsearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","channelsearch.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
+    
 <?php } 
     
+
     
     
 function draw_footer() { ?>
