@@ -96,8 +96,7 @@ function draw_users_search($search, $sort){
             <?php echo $votes?>
             <span class="separator"> | </span>
             <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username']?></a>
-            <?php   if($row['profileimg']!= ''){ ?>
-           
+            <?php   if($row['profileimg']!= ''){ ?>          
        <img src="<?php echo $row['profileimg']; ?>" width=50 height = 50> <?php } ?>
              
         </div>
