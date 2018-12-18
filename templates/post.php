@@ -26,13 +26,12 @@ function draw_post($id){
         <input type="button" value="Upvote">
         <input type="button" value="Downvote">
       </div>
+        <span class="id"><?=$id?></span>
         <div class = "post_title">
           <?php echo $result['title']; ?>
         </div>
       </div>
-      <div class="post_votes">
-          <?php echo $votes; ?><span> Vote(s)</span>
-        </div>
+      <span id="votes"><?php echo $votes?></span>
       <div class = "post_content">       
         <?php echo $result['content']; ?>
       </div>
@@ -41,18 +40,17 @@ function draw_post($id){
     }
     
   else if($result['type'] == "img"){ ?>
-  <div class="post_banner">
+    <div class="post_banner">
       <div class="votes">
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div> 
+    <span class="id"><?=$id?></span>
             <div class="post_title">
               <?php echo $result['title']; ?>
             </div>
           </div>
-          <div class="post_votes">
-            <?php echo $votes; ?>
-          </div>
+          <span id="votes"><?php echo $votes?></span>
           <div class = "post_content">
             <img src="<?php echo $result['content'] ?>"><br>
           </div>
@@ -65,13 +63,12 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div>
+    <span class="id"><?=$id?></span>
     <div class="post_title">
         <a href="<?php echo $result['content'];?>"> <?php echo $result['title'] ?></a>
     </div>
   </div>
-      <div class="post_votes">
-        <?php echo $votes; ?>
-      </div>
+  <span id="votes"><?php echo $votes?></span>
      
 <?php
     }
@@ -82,13 +79,12 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div>
+    <span class="id"><?=$id?></span>
       <div class = "post_title">
         <?php echo $result['title']; ?>
       </div>
     </div>
-    <div class="post_votes">
-        Vote(s):<?php echo $votes; ?>
-      </div>
+    <span id="votes"><?php echo $votes?></span>
         
 <?php //não tocar nisto, é para ler videos de youtube
     $url = $result['content'];
@@ -239,14 +235,15 @@ function draw_comments($postID, $fatherID, $level){
                 echo "___";     
                                       }
         ?>
-    <button type="button">Upvote</button>
-    <button type="button">Downvote</button>
+    <input type="button" value="UpVote">
+    <input type="button" value="DownVote">
+    <span class="commentid"><?=$row['commentID']?></span>
       
 <?php
         $votes = getVotesComment($row['commentID']); 
         ?>
-     <?php echo $votes;?> | 
-       <?php echo $row['content']?><br>
+        <span id="votesCom"><?php echo $votes?></span>
+       <?php echo '| '; echo $row['content'];?><br>
         
       
       <div id = 'commentfootnote'>Written by <?php echo $row['username']?> on <?php echo $row['dateWritten']?> </div>

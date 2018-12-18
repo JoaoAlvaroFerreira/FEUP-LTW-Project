@@ -20,7 +20,7 @@ downvote[i].addEventListener('click', function() {
 
 function createRequest(positive){
   let request = new XMLHttpRequest();
-  request.open("post", "../api/api_vote.php", true);
+  request.open("post", "../api/api_vote_posts.php", true);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.addEventListener('load', receiveVoteResponse);
   request.send(encodeForAjax({post_id: parseInt(id[i].textContent),positive: positive}));

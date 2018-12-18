@@ -70,7 +70,8 @@ if(isset($_GET['sort']))
             <input type="button" value="Downvote">
         </div>
         <div id="post_info">
-            <?php echo $votes?>
+            <span id="votes"><?php echo $votes?></span>
+            <span class="id"><?=$row['postID']?></span>
             <span class="separator"> | </span>
             <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
             <span class="separator">by</span>
