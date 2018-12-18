@@ -10,7 +10,7 @@ draw_header();
 
 $id = $_GET['id'];
 draw_post($id);
-
 draw_comments($id, 0,0);
+draw_floating_menu();
 draw_footer();
 ?>
