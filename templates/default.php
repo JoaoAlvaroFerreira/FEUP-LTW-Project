@@ -97,20 +97,6 @@ window.onclick = function(event) {
 }
 </script>
     </header>
-   
-     
-
-var containerreg = document.getElementById('register');
-var containerlog = document.getElementById('login');        
-
-window.onclick = function(event) {
-    if (event.target == containerreg || event.target == containerlog) {
-        containerreg.style.display = "none";
-        containerlog.style.display = "none";
-    }
-}
-</script>
-    </header>
 
 
 <?php } ?>
