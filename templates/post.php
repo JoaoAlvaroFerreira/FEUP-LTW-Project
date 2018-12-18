@@ -31,7 +31,7 @@ function draw_post($id){
           <?php echo $result['title']; ?>
         </div>
       </div>
-      <span id="votes"><?php echo $votes?></span>
+      <span id="votes"><?php echo $votes?> Vote(s)</span>
        <div class = "post_content">       
          <?php echo $result['content']; ?>
       </div>
@@ -50,7 +50,7 @@ function draw_post($id){
               <?php echo $result['title']; ?>
             </div>
           </div>
-          <span id="votes"><?php echo $votes?></span>
+          <span id="votes"><?php echo $votes?> Vote(s)</span>
           <div id = "post_image">
             <img src="<?php echo $result['content'] ?>"> 
           </div>
@@ -63,7 +63,7 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div>
-    <span class="post_id"><?=$id?></span>
+    <span class="id"><?=$id?></span>
     <div class="post_title">
         <a href="<?php echo $result['content'];?>"> 
         <?php echo $result['title'] ?></a>
@@ -80,7 +80,7 @@ function draw_post($id){
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
     </div>
-    <span class="post_id"><?=$id?></span>
+    <span class="id"><?=$id?></span>
       <div class = "post_title">
         <?php echo $result['title']; ?>
       </div>
@@ -92,8 +92,7 @@ function draw_post($id){
     parse_str( parse_url( $url, PHP_URL_QUERY ), $array_of_vars);
     $str = $array_of_vars['v'];
     draw_video($str);
-
-  }
+  } 
 ?>
     </div>
         
@@ -110,31 +109,25 @@ function draw_post($id){
        <img src="<?php echo $user['profileimg']; ?>" width=50 height = 50>  
   <?php
 } ?>
-    
-    
+     
     on <?php echo $result['dateWritten'];
-    
-    
-    
     
   if(isset($_SESSION['username'])) {
     if($result['username'] == $_SESSION['username']){ ?>
         <button onclick="document.getElementById('deletePost').style.display='block'">Delete Post</button>
-    <?php
-    } }
-    ?>
-    
-       
-    
-        <div id = "deletePost" class = "container">
-   <center><h2>Are you sure? You won't be able to get your post back.</h2>
-       
-       <form class="editform" method="post" action="../actions/act_delete_post.php">
+<?php
+    } } 
+?>
+
+  <div id="deletePost" class="container">
+   <center>
+      <h2>Are you sure? You won't be able to get your post back.</h2> 
+      <form class="editform" method="post" action="../actions/act_delete_post.php">
         <input type="hidden" name="post_id" value=<?php echo $result['postID'];?> >
         <input type="submit" value="Yes"/>
-       </form> </center>
-        </div>
-    
+      </form> 
+    </center>
+  </div>
     
   <div id="comment_number"><?php echo getCommentsPost($result['postID']);?> comments</div>
 </div>
@@ -232,59 +225,58 @@ function draw_comments($postID, $fatherID, $level){
     else{
         
     foreach($result as $row){
-        ?> <div id = 'comment'> 
-      <?php
-      for($count = 0; $count < $level; $count++){ ?>
+?>
+        <div id='comment'>
+<?php
+      for($count = 0; $count < $level; $count++){ 
+?>
                 +
-        <?php        }     ?>
+<?php        }     ?>
     
     <div id="comment_votes">
-    <input type="button" value="Upvote">
-    <input type="button" value="Downvote">
+      <input type="button" value="Upvote">
+      <input type="button" value="Downvote">
     </div>
     <span class="commentid"><?=$row['commentID']?></span>
       
 <?php
         $votes = getVotesComment($row['commentID']); 
-        ?>
+?>
         <span id="votesCom"><?php echo $votes?></span>
-        <span class="separator"> | </span>
-       <?php echo $row['content'];?>
-        
-      
+        <div id="comment_content">
+          <?php echo $row['content'];?>
+        </div>
       <div id = 'commentfootnote'>Written by <?php echo $row['username']?> on <?php echo $row['dateWritten']?> </div>
 
 <?php
+
+if(isset($_SESSION['username'])) {
+  if($row['username'] == $_SESSION['username']){ ?>
+      <button onclick="document.getElementById('deleteComment').style.display='block'">Delete Comment</button>
+  <?php
+  } }
         
          if(isset($_SESSION['username']))
         comment_reply_box($postID, $row['commentID']);
-        
         
         $level = $level+1;
         draw_comments($postID, $row['commentID'],$level);
         $level = $level-1;
         
-        if(isset($_SESSION['username'])) {
-    if($row['username'] == $_SESSION['username']){ ?>
-        <button onclick="document.getElementById('deleteComment').style.display='block'">Delete Comment</button>
-    <?php
-    } }
     ?>
     
+  <div id="deleteComment" class="container">
+   <center>
+     <h2>Are you sure? You won't be able to get your comment back.</h2>  
+        <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
+          <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
+          <input type="submit" value="Yes"/>
+      </form> 
+    </center>
+  </div>
        
-    
-        <div id = "deleteComment" class = "container">
-   <center><h2>Are you sure? You won't be able to get your comment back.</h2>
-       
-       <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
-        <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
-        <input type="submit" value="Yes"/>
-       </form> </center>
-        </div>
-       
-</div> <?php
-        
-        
+</div> 
+<?php        
         }
         
     }
@@ -366,9 +358,9 @@ function draw_video($video){?>
 
   <form method="post" action="../actions/act_comment.php" id = "post_reply">
       <input type="hidden" name="postID" value="<?php echo $postID?>">
-      <input type="text" name="content" placeholder="Write your comment">
+      <input type="text" name="content" placeholder="Write your comment...">
       <div>
-        <input type="submit" value="Reply">
+        <input type="submit" value="Reply" class="container">
         <input type="reset" value="Reset">
       </div>
   </form>

@@ -53,25 +53,18 @@ function cmpPointsComment($a, $b)
 
 
 function cmpDateUsers($a, $b)
-{
-   
-    
+{  
     return -strcmp($a['dataRegistered'],$b['dataRegistered']);
 }
 
 function cmpDate($a, $b)
 {
-   
-    
     return -strcmp($a['dateWritten'],$b['dateWritten']);
 }
 
 
-
 function draw_users_search($search, $sort){
    
-    
-
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM users WHERE username LIKE ?');
     
