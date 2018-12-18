@@ -51,7 +51,7 @@ function draw_post($id){
             </div>
           </div>
           <span id="votes"><?php echo $votes?> Vote(s)</span>
-          <div class = "post_image">
+          <div id = "post_image">
             <img src="<?php echo $result['content'] ?>"> 
           </div>
 <?php 
@@ -361,37 +361,31 @@ function draw_video($video){?>
     </script>
 <?php }
 
-//ids iguais up ahead part 2
-
  function post_reply_box($postID) { 
 ?>
 
   <form method="post" action="../actions/act_comment.php" id = "post_reply">
-    <input type="hidden" name="postID" value="<?php echo $postID?>">
-    
-    <input type="text" name="content" placeholder="Write your reply here...">
+      <input type="hidden" name="postID" value="<?php echo $postID?>">
+      <textarea placeholder="Write your reply here..."></textarea>
       <div>
-    <input type="submit" value="Reply" id="postreply">
-    <input type="reset" value="Reset">    
+        <input type="submit" value="Reply">
+        <input type="reset" value="Reset">
       </div>
   </form>
 
 <?php } 
 
-//ids iguais up ahead
-
  function comment_reply_box($postID, $fatherID) { 
 ?>
    
-
   <form method="post" action="../actions/act_comment.php"  class="comment_reply">
-    <input type="hidden" name="postID" value="<?php echo $postID?>">
-    <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
+      <input type="hidden" name="postID" value="<?php echo $postID?>">
+      <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
   <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
-    <input type="text" name="content" placeholder="Write here">
-    <div>
-    <input type="submit" value="Reply" id="commentreply">
-    <input type="reset">
+      <textarea placeholder="Write your reply here..."></textarea>
+      <div>
+        <input type="submit" value="Reply">
+        <input type="reset" value="Reset">
       </div>
   </form>
 
