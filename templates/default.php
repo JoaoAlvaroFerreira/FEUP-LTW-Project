@@ -59,12 +59,12 @@
     <div class="search-container">
     <form action="../pages/search.php">
         <input type="text" placeholder="Search.." name="search">
-        <select name="Type" >
+        <select name="Type" class="search_options">
             <option value="Posts">Stories</option>
             <option value="Comments">Comments</option>
             <option value="Users">Users</option>
         </select>
-        <select name="Sort">
+        <select name="Sort" class="search_options">
             <option value="new">New</option>
             <option value="votes">Votes</option>
         </select>

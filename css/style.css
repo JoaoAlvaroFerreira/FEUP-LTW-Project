@@ -15,8 +15,6 @@ body{
     font-size: 120%;
     font-family: Lato, Arial, sans-serif;
     transition: box-shadow .2s cubic-bezier(.4,0,1,1),background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
-
-    /* overflow-x:hidden; */
 }
 
 a:link{    
@@ -274,10 +272,6 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
-/* #post_page{
-    font-size: 150%;
-} */
-
 #full_post{
     border-bottom: 0.2em dotted black;
 }
@@ -412,7 +406,6 @@ input[type=text], input[type=password] {
 
 
 #post_info{
-    /* display: block; */
     margin: auto;
 }
 
@@ -421,7 +414,6 @@ input[type=text], input[type=password] {
     display: flex;
 }
 
-/*por titulo "bonito"*/
 .post_title{
     text-align: center;
     flex-grow: 1;
@@ -429,7 +421,6 @@ input[type=text], input[type=password] {
 }
 
 .post_votes{
-    /* display: flex; */
     font-size: 120%;
     float: left;
     margin-left: 0.75em;
@@ -620,5 +611,33 @@ input[type=text], input[type=password] {
 }
 
 #commentfootnote {
+    margin: 1em;
+}
+
+.search_options {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.search-container button {
+    margin: 1em;
+    margin-top: -1em;
+
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 20%;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 110%;
+}
+
+.search-container button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.userposts {
     margin: 1em;
 }
