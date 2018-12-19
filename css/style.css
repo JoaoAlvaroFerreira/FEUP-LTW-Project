@@ -173,13 +173,21 @@ input[type=text], input[type=password] {
 
 
 /* Modal Content/Box */
-.authform {
+.authform_login {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 2px solid #888;
   width: 20%; /* Could be more or less, depending on screen size */
-  height: 25%;
+  height: 23%;
 }
+
+.authform_register {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 2px solid #888;
+    width: 20%; /* Could be more or less, depending on screen size */
+    height: 33%;
+  }
 
 /* Modal Content/Box */
 .deleteform {

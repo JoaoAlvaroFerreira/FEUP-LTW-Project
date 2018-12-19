@@ -4,7 +4,7 @@
     
     <div id = "login" class = "container">
 
-    <form class="authform" method="post" action="../actions/act_login.php">
+    <form class="authform_login" method="post" action="../actions/act_login.php">
        
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
@@ -23,7 +23,7 @@
   <div id = "register" class = "container">
     
  
-    <form class="authform" method="post" action="../actions/act_register.php">
+    <form class="authform_register" method="post" action="../actions/act_register.php">
       <input type="text" name="username" placeholder="username" required>
       <input type="password" name="password" placeholder="password" required>
        <input type="text" name="email" placeholder="email" required>
