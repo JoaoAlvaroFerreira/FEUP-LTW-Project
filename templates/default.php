@@ -1,5 +1,6 @@
 <?php
     include_once "../templates/auth.php";
+include_once "../database/session.php";
 ?>
 <?php function draw_header() {
 ?>
@@ -13,6 +14,8 @@
     <link href="../css/style.css" rel="stylesheet">
 <link rel="icon" href="..//pages/images/fire_icon.png">
 <script src="../JS/script.js" defer></script>
+<script src="../JS/formLeave.js" defer></script>
+<script src="../JS/moveMenu.js" defer></script>
 </head>
 
 <body>
@@ -58,25 +61,25 @@
         
     <div class="search-container">
     <form action="../pages/search.php">
-        <input type="text" placeholder="Search.." name="search">
+        
+         <select name="Sort" class="search_options">
+            <option value="new">New</option>
+            <option value="votes">Votes</option>
+        </select>
         <select name="Type" class="search_options">
             <option value="Posts">Stories</option>
             <option value="Comments">Comments</option>
             <option value="Users">Users</option>
+            <option value="Channels">Channels</option>
         </select>
-        <select name="Sort" class="search_options">
-            <option value="new">New</option>
-            <option value="votes">Votes</option>
-        </select>
-        <button type="submit">Go!</button>
+     
+        <input type="text" placeholder="Search.." name="search">
+          <button type="submit">Go!</button>
+        
     </form>
     </div>
         
-        <form>
-        <div id="channelsearch">
-            <input type="text" placeholder="Channel Search..." onkeyup="draw_channel_search(this.value)">
-        </div>
-</form>
+       
 </nav>
            
         
@@ -85,18 +88,7 @@
                 draw_login();
          ?>
         
-        <script>
-
-var containerreg = document.getElementById('register');
-var containerlog = document.getElementById('login');        
-
-window.onclick = function(event) {
-    if (event.target == containerreg || event.target == containerlog) {
-        containerreg.style.display = "none";
-        containerlog.style.display = "none";
-    }
-}
-</script>
+       
     </header>
 
 
@@ -134,79 +126,9 @@ window.onclick = function(event) {
            </div>
         </div>
  
-<script>
-    // Make the DIV element draggable:
-window.onload = function(){
-    dragElement(document.getElementById("floatingmenu"));
+
     
 
-function dragElement(elmnt) {
-    console.log(elmnt)
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV: 
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
-}</script>
-    
- <script>
-function draw_channel_search(str) {
-    
-  if (str.length==0) { 
-    document.getElementById("channelsearch").innerHTML="";
-    document.getElementById("channelsearch").style.border="0px";
-    return;
-  }
-  if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  } else {  // code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      document.getElementById("channelsearch").innerHTML=this.responseText;
-      document.getElementById("channelsearch").style.border="1px solid #A5ACB2";
-    }
-  }
-  xmlhttp.open("GET","channelsearch.php?q="+str,true);
-  xmlhttp.send();
-}
-</script>
     
 <?php } 
      

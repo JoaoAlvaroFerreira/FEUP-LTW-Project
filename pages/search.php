@@ -4,6 +4,7 @@ include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
 include_once "../templates/post.php";
+include_once "../database/session.php";
 
 
 
@@ -19,6 +20,8 @@ else if($type == "Comments")
 draw_comments_search($search, $sort);
 else if ($type == "Posts")
 draw_posts_search($search, $sort);
+else if ($type == "Channels")
+draw_channels($search, $sort);
 
 draw_floating_menu();
 draw_footer();
@@ -86,7 +89,8 @@ function draw_users_search($search, $sort){
 
     <div id="postlist">
         <div id="post_info">
-            <?php echo $votes?>
+            <span class="id"><?=$row['postID']?></span>
+             <span id="votes"><?php echo $votes?></span>
             <span class="separator"> | </span>
             <a href = "../pages/viewProfile.php?username=<?php echo $row['username']?>"><?php echo $row['username']?></a>
             <?php   if($row['profileimg']!= ''){ ?>          
@@ -173,6 +177,43 @@ function draw_comments_search($search,$sort){
         </div> 
     </div> 
 <?php
+        
+   
+    }
+    
+}
+
+
+function draw_channels($search,$sort){ 
+    
+
+    $db = Database::getInstance()->db();
+    $stmt = $db->prepare('SELECT * FROM posts WHERE channel LIKE ?  group by channel');
+    
+    $stmt->execute(array('%'.$search.'%'));
+    
+    $result = $stmt->fetchAll();
+    
+    if($sort == "votes")
+    usort($result, "cmpPointsPost");
+    
+    else if($sort == "new")
+    usort($result, "cmpDate");
+    
+    foreach ($result as $row) {
+
+   ?>
+
+    <div id="postlist">
+        <div id="post_info">
+            
+            <a href = "../pages/channel.php?id=<?php echo $row['channel'] ?>"><?php echo $row['channel'] ?></a>
+            
+            <br>
+        </div>
+    </div>
+
+<?php     
    
     }
     

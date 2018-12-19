@@ -5,9 +5,11 @@ include_once "../database/init.php";
 include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
+include_once "../database/utilities.php";
 include_once "../templates/post.php";
 
 function draw_post($id){
+    
     
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM posts WHERE postID = ?');
@@ -31,8 +33,8 @@ function draw_post($id){
           <?php echo $result['title']; ?>
         </div>
       </div>
-      <span id="votes"><?php echo $votes?></span>
-      <span> Vote(s)</span>
+        <span id="votes"><?php echo $votes?></span>
+       <span> Vote(s)</span>
        <div class = "post_content">       
          <?php echo $result['content']; ?>
       </div>
@@ -118,105 +120,44 @@ function draw_post($id){
     
   if(isset($_SESSION['username'])) {
     if($result['username'] == $_SESSION['username']){ ?>
-        <button onclick="document.getElementById('deletePost').style.display='block'">Delete Post</button>
+        <button id="post_delete_button" onclick="document.getElementById('deletePost').style.display='block'">Delete Post</button>
 <?php
     } } 
 ?>
 
   <div id="deletePost" class="container">
-   <center>
-      <h2>Are you sure? You won't be able to get your post back.</h2> 
-      <form class="editform" method="post" action="../actions/act_delete_post.php">
+   
+     
+      <form class="deleteform" method="post" action="../actions/act_delete_post.php">
+          
+           <h2>Are you sure? You won't be able to get your post back.</h2> 
         <input type="hidden" name="post_id" value=<?php echo $result['postID'];?> >
         <input type="submit" value="Yes"/>
       </form> 
-    </center>
+   
   </div>
     
   <div id="comment_number"><?php echo getCommentsPost($result['postID']);?> comments</div>
 </div>
 
 </div>
+    
 
   <?php if(isset($_SESSION['username']))
     post_reply_box($id);
 
 }
 
-function getUserPoints($username){
-     $db = Database::getInstance()->db();
-      
-    $stmt = $db->prepare('SELECT * FROM posts WHERE username = ?');
-    $stmt->execute(array($username));
-    $stories = $stmt->fetchAll();
-    $stmt = $db->prepare('SELECT * FROM comments WHERE username = ?');
-    $stmt->execute(array($username));
-    $comments = $stmt->fetchAll();
-    $points = 0;
-    
-    foreach($stories as $row){
-        $points = $points + getVotesPost($row['postID']);
-    }
-    
-     foreach($comments as $row){
-        $points = $points + getVotesComment($row['commentID']);
-    }
-    
-    return $points;
-    
-    
-}
-
-function getCommentCountUser($username){
-     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM comments WHERE username = ?');
-    $stmt->execute(array($username));
-    $result = $stmt->fetchAll();
-   
-    return count($result);
-}
-
-function getPostCountUser($username){
-     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM posts WHERE username = ?');
-    $stmt->execute(array($username));
-    $result = $stmt->fetchAll();
-   
-    return count($result);
-}
-
-function getVotesPost($id){
-    
-    $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM postvotes WHERE postID = ?');
-    $stmt->execute(array($id));
-    $result = $stmt->fetchAll();
-    $votes = 0;
-    
-    foreach ($result as $row) {
-   
-    if($row['positive'] == 1)
-        $votes = $votes+1;
-    else $votes = $votes - 1;
-    }
-    
-    return $votes;
-}
-
-function getCommentsPost($id){
-    
-    $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM comments WHERE postID = ?');
-    $stmt->execute(array($id));
-    $result = $stmt->fetchAll();
-   
-    return count($result);
-}
 
 
 
-function draw_comments($postID, $fatherID, $level){
+
+
+function draw_comments($postID, $fatherID, $level){ ?> 
+    <script src="../JS/formLeave.js" defer></script>
  
+    <?php
+    
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM comments WHERE postID = ? AND fatherID = ?');
     $stmt->execute(array($postID,$fatherID));
@@ -229,35 +170,45 @@ function draw_comments($postID, $fatherID, $level){
     else{
         
     foreach($result as $row){
-?>
-        <div id='comment'>
-<?php
-      for($count = 0; $count < $level; $count++){ 
-?>
-                +
-<?php        }     ?>
+
+    $votes = getVotesComment($row['commentID']);  ?>
     
     <div id="comment_votes">
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
+          <span id="votesCom"><?php echo $votes?></span>
+                 <span> Vote(s)</span>
     </div>
+          
     <span class="commentid"><?=$row['commentID']?></span>
       
 <?php
-        $votes = getVotesComment($row['commentID']); 
+      
 ?>
-        <span id="votesCom"><?php echo $votes?></span>
-        <span> Vote(s)</span>
+        
+   
         <div id="comment_content">
           <?php echo $row['content'];?>
         </div>
-      <div id = 'commentfootnote'>Written by <?php echo $row['username']?> on <?php echo $row['dateWritten']?> </div>
+      <div id = 'commentfootnote'>Written by <?php echo $row['username']?> on <?php echo $row['dateWritten']?> 
 
 <?php
 
 if(isset($_SESSION['username'])) {
   if($row['username'] == $_SESSION['username']){ ?>
-      <button onclick="document.getElementById('deleteComment').style.display='block'">Delete Comment</button>
+      <button id="comment_delete_button" onclick="document.getElementById('deleteComment').style.display='block'">Delete Comment</button>
+          
+          <div id="deleteComment" class="container">
+   <center>
+     <h2>Are you sure? You won't be able to get your comment back.</h2>  
+        <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
+        <input type="hidden" name="post_id" value="<?php echo $row['postID'];?>" >
+          <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
+          <input type="submit" value="Yes"/>
+      </form> 
+    </center>
+  </div>
+       </div>
   <?php
   } }
         
@@ -270,17 +221,8 @@ if(isset($_SESSION['username'])) {
         
     ?>
     
-  <div id="deleteComment" class="container">
-   <center>
-     <h2>Are you sure? You won't be able to get your comment back.</h2>  
-        <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
-          <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
-          <input type="submit" value="Yes"/>
-      </form> 
-    </center>
-  </div>
-       
-</div> 
+  
+ 
 <?php        
         }
         
@@ -288,25 +230,7 @@ if(isset($_SESSION['username'])) {
 }
 
 
-function getVotesComment($idcomment){
-    
-    $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM commentvotes WHERE commentID = ?');
-    $stmt->execute(array($idcomment));
-    $result = $stmt->fetchAll();
-    $votes = 0;
-    
-   
-    foreach ($result as $row) {
-   
-    if($row['positive'] == 1)
-        $votes = $votes+1;
-    else $votes = $votes - 1;
-    }
-    
-    return $votes;
-    
-}
+
 
 //Isto é a API do YouTube
 function draw_video($video){?> 
@@ -363,9 +287,9 @@ function draw_video($video){?>
 
   <form method="post" action="../actions/act_comment.php" id = "post_reply">
       <input type="hidden" name="postID" value="<?php echo $postID?>">
-      <input type="text" name="content" placeholder="Write your comment...">
-      <div>
-        <input type="submit" value="Reply" class="container">
+      <input type="text" name="content" placeholder="Write your comment..." required>
+      <div class="reply_reset_buttons">
+        <input type="submit" value="Reply" >
         <input type="reset" value="Reset">
       </div>
   </form>
@@ -378,9 +302,8 @@ function draw_video($video){?>
   <form method="post" action="../actions/act_comment.php"  class="comment_reply">
       <input type="hidden" name="postID" value="<?php echo $postID?>">
       <input type="hidden" name="fatherID" value="<?php echo $fatherID?>">
-  <!--<textarea name="content" placeholder="Write your comment here" form="commentreply" rows="3" cols="40"></textarea>-->
-       <input type="text" name="content" placeholder="Write your comment">
-      <div>
+       <input type="text" name="content" placeholder="Write your comment" required>
+      <div class="reply_reset_buttons">
         <input type="submit" value="Reply">
         <input type="reset" value="Reset">
       </div>

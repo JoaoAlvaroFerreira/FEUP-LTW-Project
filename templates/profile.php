@@ -9,6 +9,7 @@ include_once "../templates/post.php";
 
 function draw_user_info($username){
     
+    
     $db = Database::getInstance()->db();
     $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
     $stmt->execute(array($username));
@@ -16,33 +17,34 @@ function draw_user_info($username){
      
           ?>
 
-    <div id="profileInfo"> 
+    <div id="profileInfo">
+        
         <?php if($result['profileimg'] != ''){ ?>
-        <div> <img src="<?php echo $result['profileimg']; ?>" width=100 height = 100></div>  
-        <?php   } ?>
+       <p> <img src="<?php echo $result['profileimg']; ?>" width=100 height = 100></p>  
+       <?php   } ?>
         
-        <div id="user_name">User: <?php echo $result['username']; ?></div>
+        <p>User: <?php echo $result['username']; ?></p>
         
-        <div id="date_register">Registed since: <?php echo $result['dataRegistered']; ?></div>
+        <p>Registed since: <?php echo $result['dataRegistered']; ?></p>
   
-        <div id="email">E-Mail: <?php echo $result['email']; ?></div>
+        <p>E-Mail: <?php echo $result['email']; ?></p>
         
         <?php if($result['dateofbirth']!= ''){ ?>
-        <div id="date_birth">Data of Birth: <?php echo $result['dateofbirth']; ?></div>  <?php }
+       <p>Data of Birth: <?php echo $result['dateofbirth']; ?></p>  <?php }
             
         if($result['description']!= ''){ ?>
-        <div id="user_description">Description: <?php echo $result['description']; ?></div>  <?php } ?> 
+        <p>Description: <?php echo $result['description']; ?></p>  <?php } ?> 
     </div>
         
    
 <?php     
     
-     if(isset($_SESSION['username'])) {
+    if(isset($_SESSION['username'])) {
     if($username == $_SESSION['username']){ ?>
-        <button onclick="document.getElementById('editprofile')" id="edit_button">Edit Profile</button>
+        <button id="edit_button" onclick="document.getElementById('editprofile').style.display='block'">Edit Profile</button>
 <?php } } ?>   
 
-    <center id="editprofile" class="container">
+   <center id="editprofile" class="container">
         <form class="editform" method="post" action="../actions/act_edit_profile.php">
             <input type="password" name="password" placeholder="password (verification)" required>
             <input type="password" name ="newpassword" placeholder= "new password (only write here if you intend on changing your password)">
@@ -57,21 +59,14 @@ function draw_user_info($username){
        </form> 
     </center> 
             
-<script>
-
-var container = document.getElementById('editprofile');
-
-window.onclick = function(event) {
-    if (event.target == container) {
-        container.style.display = "none";
-    }
-}
-
-</script>
+ 
+      
 
 <?php 
 
 }
+
+
 
 
 function draw_user_posts($username){
@@ -84,7 +79,7 @@ function draw_user_posts($username){
     
     if(empty($result)){
 ?>
-        <h3 class = "userposts">This user hasn't made any posts</h3>
+        <h3  class = "userposts">This user hasn't made any posts</h3>
 <?php
     }
     else{ 
@@ -95,7 +90,7 @@ function draw_user_posts($username){
     foreach ($result as $row){ 
     $votes = getVotesPost($row['postID']);
 ?>
-    <div id = "userpostlist" class="userposts1">
+    <div id = "userpostlist">
         <span id="votes"><?php echo $votes?></span>
         <span class="separator"> | </span>
         <a href = "../pages/viewPost.php?id=<?php echo $row['postID']?>"><?php echo $row['title']?></a>
@@ -118,11 +113,11 @@ function draw_user_comments($username){
     $result = $stmt->fetchAll();
     
     if(empty($result)){
-        ?><h4 class = "userposts">This user hasn't made any comments</h4><?php
+        ?><h4 class = "usercomments">This user hasn't made any comments</h4><?php
     }else{ ?>
     
-    <div id = "usercomments"> 
-        <h4 class = "userposts">Comments made by this user:</h4>
+    <div> 
+        <h4 class = "usercomments">Comments made by this user:</h4>
     <?php
     foreach ($result as $row){ 
         $db = Database::getInstance()->db();
@@ -132,7 +127,7 @@ function draw_user_comments($username){
         
     $votes = getVotesComment($row['commentID']);
         ?>
-    <div id = "usercommentlist" class = "userposts1">
+    <div id = "usercommentlist">
         <?php echo $votes;?> | <?php echo $row['content'];?> on 
         <a href = "../pages/viewPost.php?id=<?php echo $post['postID'];?>"><?php echo $post['title'];?></a> at <?php echo $row['dateWritten'];?>
     
@@ -143,3 +138,4 @@ function draw_user_comments($username){
 }
 
 ?>
+

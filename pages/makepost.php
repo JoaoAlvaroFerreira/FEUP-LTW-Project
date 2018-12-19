@@ -4,6 +4,7 @@ include_once "../database/init.php";
 include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
+include_once "../database/session.php";
 
 draw_header();
 
@@ -18,7 +19,7 @@ draw_header();
             <input type="radio" name="type" value="video"> YouTube<br>
             <textarea name="content" placeholder="Write your post or paste your url here" form="userpost" rows="20" cols="100" required></textarea><br> 
             </div>
-            Channel:<br><input type ="text" placeholder="Write the name of the channel that you'll post this story to" required><br>
+            Channel:<br><input type ="text" name = "channel" placeholder="Write the name of the channel that you'll post this story to" required ><br>
             <input type="submit" value="Submit" form="userpost">
             <input type="reset" form="userpost">
         </form>

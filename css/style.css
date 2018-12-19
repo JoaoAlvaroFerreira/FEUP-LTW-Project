@@ -171,8 +171,27 @@ input[type=text], input[type=password] {
   padding-top: 60px;
 }
 
+
 /* Modal Content/Box */
 .authform {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 2px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  height: 25%;
+}
+
+/* Modal Content/Box */
+.deleteform {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 2px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  height: 25%;
+}
+
+/* Modal Content/Box */
+.editform {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 2px solid #888;
@@ -556,6 +575,7 @@ input[type=text], input[type=password] {
     padding: 30px;  
     border: 2px solid black;
     border-radius: 25px;
+    background-color: aliceblue;
 
     overflow: auto;
 
@@ -638,11 +658,21 @@ input[type=text], input[type=password] {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.userposts {
+.userposts, .usercomments{
     margin: 1em;
+    text-decoration: underline;
 }
 
-.userposts1 {
+#userpostlist{
     margin: 1em;
-    margin-left: 2em;
+    padding: 0.4em;
+    background-color: aliceblue;
+    border: 2px solid black;
+}
+
+#usercommentlist{
+    margin: 1em;
+    padding: 0.4em;
+    background-color: aliceblue;
+    border: 1px solid black;
 }

@@ -3,7 +3,7 @@
   include_once ('../database/session.php');
 
 
-$id = htmlspecialchars($_POST['id']);
+$id = htmlspecialchars($_POST['post_id']);
 
 deletePost($id);
 
