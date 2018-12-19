@@ -1,12 +1,10 @@
 <?php
   
-
 include_once "../database/init.php";
 include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
 include_once "../templates/post.php";
-
 function draw_user_info($username){
     
     
@@ -43,8 +41,8 @@ function draw_user_info($username){
     if($username == $_SESSION['username']){ ?>
         <button id="edit_button" onclick="document.getElementById('editprofile').style.display='block'">Edit Profile</button>
 <?php } } ?>   
-
-   <center id="editprofile" class="container">
+<center>
+   <div id="editprofile" class="container">
         <form class="editform" method="post" action="../actions/act_edit_profile.php">
             <input type="password" name="password" placeholder="password (verification)" required>
             <input type="password" name ="newpassword" placeholder= "new password (only write here if you intend on changing your password)">
@@ -52,23 +50,18 @@ function draw_user_info($username){
             <input type="text" name="profileimg" placeholder="profile image (URL)" value="<?php echo $result['profileimg']; ?>">
             <input type="text" name="description" placeholder="description" value="<?php echo $result['description']; ?>">
          
-            <p></p>Date of Birth: <input type="date" name="dateofbirth" placeholder="date of birth" value="<?php echo $result['dateofbirth']; ?>">      
+            <p></p>Date of Birth: <input type="date" name="dateofbirth" placeholder="date of birth" value="<?php echo $result['dateofbirth']; ?>">     
             <div>
-                <input type="submit" value="Register">
+                <input type="submit" value="Submit Changes">
             </div>
        </form> 
-    </center> 
+    </div> </center>
             
  
       
 
 <?php 
-
 }
-
-
-
-
 function draw_user_posts($username){
     
     
@@ -102,7 +95,6 @@ function draw_user_posts($username){
         }
     }    
 }
-
 function draw_user_comments($username){
     
     
@@ -136,6 +128,5 @@ function draw_user_comments($username){
         }
     }    
 }
-
 ?>
 

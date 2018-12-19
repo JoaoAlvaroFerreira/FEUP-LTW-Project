@@ -53,8 +53,8 @@ function draw_post($id){
               <?php echo $result['title']; ?>
             </div>
           </div>
-          <span id="votes"><?php echo $votes?></span>
-          <span> Vote(s)</span>
+           <span id="votes"><?php echo $votes?></span>
+       <span> Vote(s)</span>
           <div id = "post_image">
             <img src="<?php echo $result['content'] ?>"> 
           </div>
@@ -127,14 +127,14 @@ function draw_post($id){
 
   <div id="deletePost" class="container">
    
-     
+     <center>
       <form class="deleteform" method="post" action="../actions/act_delete_post.php">
           
            <h2>Are you sure? You won't be able to get your post back.</h2> 
         <input type="hidden" name="post_id" value=<?php echo $result['postID'];?> >
         <input type="submit" value="Yes"/>
       </form> 
-   
+      </center>
   </div>
     
   <div id="comment_number"><?php echo getCommentsPost($result['postID']);?> comments</div>
@@ -170,9 +170,25 @@ function draw_comments($postID, $fatherID, $level){ ?>
     else{
         
     foreach($result as $row){
+        
+         
+    switch($level){
+        case 0: ?> <div id = "comment_box"> <?php ;
+            break;
+         case 1: ?> <div id = "comment_box2"> <?php ;
+            break;
+        case 2: ?> <div id = "comment_box3"> <?php ;
+            break;
+        case 3: ?> <div id = "comment_box4"> <?php ;
+            break;
+        case 4: ?> <div id = "comment_box5"> <?php ;
+            break;
+        default: ?> <div id = "comment_box5"> <?php ;
+    }
+      
 
     $votes = getVotesComment($row['commentID']);  ?>
-    
+   
     <div id="comment_votes">
       <input type="button" value="Upvote">
       <input type="button" value="Downvote">
@@ -181,11 +197,7 @@ function draw_comments($postID, $fatherID, $level){ ?>
     </div>
           
     <span class="commentid"><?=$row['commentID']?></span>
-      
-<?php
-      
-?>
-        
+    
    
         <div id="comment_content">
           <?php echo $row['content'];?>
@@ -200,8 +212,9 @@ if(isset($_SESSION['username'])) {
           
           <div id="deleteComment" class="container">
    <center>
-     <h2>Are you sure? You won't be able to get your comment back.</h2>  
+     
         <form class="deleteform" method="post" action="../actions/act_delete_comment.php">
+            <h4>Are you sure? You won't be able to get your comment back.</h4>  
         <input type="hidden" name="post_id" value="<?php echo $row['postID'];?>" >
           <input type="hidden" name="id" value="<?php echo $row['commentID'];?>" >
           <input type="submit" value="Yes"/>
@@ -210,27 +223,32 @@ if(isset($_SESSION['username'])) {
   </div>
        </div>
   <?php
-  } }
+  } 
+
+
+    ?>
+    
+    <div id = "commentreplybox"><?php comment_reply_box($postID, $row['commentID']); ?> </div>
+    
+    <?php
+}
         
-         if(isset($_SESSION['username']))
-        comment_reply_box($postID, $row['commentID']);
+         
         
         $level = $level+1;
         draw_comments($postID, $row['commentID'],$level);
         $level = $level-1;
         
-    ?>
+    ?></div>
     
   
  
 <?php        
         }
         
+    
     }
 }
-
-
-
 
 //Isto é a API do YouTube
 function draw_video($video){?> 

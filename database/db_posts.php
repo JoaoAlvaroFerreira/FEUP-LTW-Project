@@ -56,6 +56,19 @@ function deleteComment($id){
     $stmt = $db->prepare('DELETE FROM commentvotes WHERE commentID=?');
     $stmt->execute([$id]);
     
+<<<<<<< HEAD
+=======
+    $stmt = $db->prepare('SELECT * FROM comments WHERE fatherID=?');
+    $stmt->execute(array($id));
+    $commentIDS = $stmt -> fetchAll();
+    
+    foreach($commentIDS as $row){
+    $stmt = $db->prepare('DELETE FROM comments WHERE commentID=?');
+    $stmt->execute(array($row['commentID']));
+    }
+    
+    
+>>>>>>> ea4044704301b6e5176b8775b33895d684548647
     $stmt = $db->prepare('DELETE FROM comments WHERE commentID=?');
     $stmt->execute([$id]);
     
