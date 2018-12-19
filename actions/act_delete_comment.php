@@ -5,16 +5,13 @@
 
 $id = htmlspecialchars($_POST['id']);
 
+$postID = htmlspecialchars($_POST['post_id']);
 
     
-    $db = Database::getInstance()->db();
-    $stmt = $db->prepare('SELECT * FROM comments WHERE commentID=?');
-    $stmt->execute(array($id));
-    $result = $stmt->fetch();
 
 deleteComment($id);
     
    
 
-header('Location: ../pages/viewPost.php?id='.$result['postID']);
+header('Location: ../pages/viewPost.php?id='.$postID);
 ?>
