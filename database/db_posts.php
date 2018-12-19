@@ -25,8 +25,25 @@
     function deletePost($id){
         
     $db = Database::getInstance()->db();
+        
+    $stmt = $db->prepare('DELETE FROM postvotes WHERE postID=?');
+    $stmt->execute(array($id));
+    
+    $stmt = $db->prepare('SELECT * FROM comments WHERE postID=?');
+    $stmt->execute(array($id));
+    $commentIDS = $stmt -> fetchAll();
+    
+    foreach($commentIDS as $row){
+    $stmt = $db->prepare('DELETE FROM commentvotes WHERE commentID=?');
+    $stmt->execute(array($row['commentID']));
+    }
+        
+    $stmt = $db->prepare('DELETE FROM comments WHERE postID=?');
+    $stmt->execute(array($id));
+        
     $stmt = $db->prepare('DELETE FROM posts WHERE postID=?');
     $stmt->execute(array($id));
+        
       
     return true;
         
@@ -35,10 +52,23 @@
 function deleteComment($id){
         
     $db = Database::getInstance()->db();
-    $stmt = $db->prepare('DELETE FROM comments WHERE commentID=?');
+    
+    $stmt = $db->prepare('DELETE FROM commentvotes WHERE commentID=?');
+    $stmt->execute([$id]);
+    
+    $stmt = $db->prepare('SELECT * FROM comments WHERE fatherID=?');
     $stmt->execute(array($id));
-    echo $id;
-      
+    $commentIDS = $stmt -> fetchAll();
+    
+    foreach($commentIDS as $row){
+    $stmt = $db->prepare('DELETE FROM comments WHERE commentID=?');
+    $stmt->execute(array($row['commentID']));
+    }
+    
+    
+    $stmt = $db->prepare('DELETE FROM comments WHERE commentID=?');
+    $stmt->execute([$id]);
+    
     return true;
         
     }

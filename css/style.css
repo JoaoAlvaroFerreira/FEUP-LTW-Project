@@ -171,6 +171,9 @@ input[type=text], input[type=password] {
   padding-top: 60px;
 }
 
+
+
+
 /* Modal Content/Box */
 .authform {
   background-color: #fefefe;
@@ -178,6 +181,25 @@ input[type=text], input[type=password] {
   border: 2px solid #888;
   width: 20%; /* Could be more or less, depending on screen size */
   height: 25%;
+}
+
+/* Modal Content/Box */
+.deleteform {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 2px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  height: 25%;
+}
+
+/* Modal Content/Box */
+.editform {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 3px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+  height: 40%;
+ align-self: center;
 }
 
 #postlist{
@@ -327,6 +349,59 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
+#comment_box{
+    background-color: #6E7889;
+    margin-left: 1em;
+    color: white;
+    border-radius: 8px;
+    color: black;
+}
+
+#comment_box2{
+    margin-left: 3em;
+    background-color: beige;
+    color: white;
+    border-radius: 8px;
+    color: black;
+}
+
+#comment_box3{
+    margin-left: 5em;
+    background-color: lightblue;
+    color: #D9D9DE;
+    border-radius: 8px;
+    color: black;
+}
+
+#comment_box4{
+    margin-left: 7em;
+    background-color: #F3B54A;
+    color: white;
+    border-radius: 2px;
+    color: black;
+}
+
+#comment_box5{
+    margin-left: 9em;
+    background-color: lightcyan;
+    color: white;
+    border-radius: 8px;
+    color: black;
+}
+
+#comment_box6{
+    margin-left: 9em;
+    background-color: lightpink;
+    color: white;
+    border-radius: 8px;
+    color: black;
+}
+
+
+#commentreplybox{
+    display:block;
+}
+
 #comment_votes {
     cursor: default;
     display: flex;
@@ -335,14 +410,14 @@ input[type=text], input[type=password] {
 #comment_votes input:first-child {
     background-color: white;
     border: 2px solid #4CAF50;
-    border-radius: 8px;
+    border-radius: 2px;
     color: black;
-    padding: 4px 16px;
+    padding: 1px 6px;
     text-align: center;
     text-decoration: none;
     display: block;
     font-size: 14px;
-    margin: 4px 2px;
+    margin: 2px 1px;
     cursor: pointer;
     
     -webkit-transition-duration: 0.4s;
@@ -556,6 +631,7 @@ input[type=text], input[type=password] {
     padding: 30px;  
     border: 2px solid black;
     border-radius: 25px;
+    background-color: aliceblue;
 
     overflow: auto;
 
@@ -611,7 +687,7 @@ input[type=text], input[type=password] {
 }
 
 #commentfootnote {
-    margin: 1em;
+    margin: .25em;
 }
 
 .search_options {
@@ -638,6 +714,24 @@ input[type=text], input[type=password] {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.userposts {
+.userposts, .usercomments {
     margin: 1em;
+    text-decoration: underline;
 }
+
+#userpostlist{
+    margin: 2em;
+    background-color: aliceblue;
+    border: 2px solid black;
+    padding: 0.4em;
+    background-color: aliceblue;
+    border: 2px solid black;
+}
+
+#usercommentlist{
+    margin: 1em;
+    padding: 0.4em;
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+

@@ -4,6 +4,7 @@ include_once "../templates/auth.php";
 include_once "../templates/default.php";
 include_once "../database/session.php";
 include_once "../templates/post.php";
+include_once "../database/session.php";
 
 
 
@@ -60,7 +61,7 @@ function draw_users(){
    
     
     $sortType = "points";
-if(isset(htmlspecialchars($_GET['sort'])))
+if(isset($_GET['sort']))
     $sortType = htmlspecialchars($_GET['sort']);
 
     $db = Database::getInstance()->db();
