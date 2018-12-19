@@ -1,4 +1,4 @@
-body{
+body {
     
     margin: 0 auto;
 
@@ -17,7 +17,7 @@ body{
     transition: box-shadow .2s cubic-bezier(.4,0,1,1),background .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
 }
 
-a:link{    
+a:link {    
     position: relative;
     text-decoration: none;
     -webkit-transition: all 1s linear; 
@@ -32,7 +32,8 @@ a:hover {
     color: #fff; 
 }
 
-#logo_tabmenu{
+/*banner do site basicamente, logo mais menu para selecionar posts, fazer login, etc.*/
+#logo_tabmenu {
     
     background: var(--light-color);
 
@@ -40,12 +41,11 @@ a:hover {
     grid-template-columns: 0.6fr 2fr;
 }
 
-#logo{
+#logo {
     padding: 0.5em;
 }
 
-
-
+/*rodapé de forma a ficar no fundo da página*/
 .footer {
     position: absolute;
     margin-top: 0.5em;
@@ -53,14 +53,14 @@ a:hover {
     width: 100%;
     color: black;
     text-align: center;
-  }
+}
 
+/*menu de sort e onde tem a opcao de fazer login e register*/
 .nav ul {
     *zoom:1;
     list-style:none;
     margin:0;
-    padding:0;
-   
+    padding:0; 
 }
 
 .nav ul:before,.nav ul:after {
@@ -125,7 +125,7 @@ a:hover {
     z-index:1;
     max-height:0;
     overflow:hidden;
-    -webkit-transform:perspective(400) rotate3d(1,0,0,-90deg);
+    -webkit-transform:perspective(400) rotate3d(1,0,0,-90deg); /*animacoes*/
     -webkit-transform-origin:50% 0;
     -webkit-transition:350ms;
     -moz-transition:350ms;
@@ -133,7 +133,7 @@ a:hover {
     transition:350ms;
 }
 
-.nav li ul a:hover{
+.nav li ul a:hover {
     cursor: pointer;
     width: 100%;
     background: rgba(0,0,0,0.2);
@@ -144,7 +144,7 @@ a:hover {
     -webkit-transform:perspective(400) rotate3d(0,0,0,0);
 }
 
-
+/*atributos quase exclusivamente do login e do register*/
 input[type=text], input[type=password] {
   width: 80%;
   padding: 12px 12px;
@@ -154,60 +154,56 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-
-
-/* The Modal (background) */
+/*fundo desvanecido*/
 .container {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
   padding-top: 60px;
 }
 
-
-/* Modal Content/Box */
+/*os seguintes ...form sao para sobrepor o menu em cima do eecra desvanecido*/
 .authform_login {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
   border: 2px solid #888;
-  width: 20%; /* Could be more or less, depending on screen size */
+  width: 20%;
   height: 23%;
 }
 
 .authform_register {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 5% auto 15% auto;
     border: 2px solid #888;
-    width: 20%; /* Could be more or less, depending on screen size */
+    width: 20%;
     height: 33%;
-  }
+}
 
-/* Modal Content/Box */
 .deleteform {
   background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
   border: 2px solid #888;
-  width: 20%; /* Could be more or less, depending on screen size */
+  width: 20%;
   height: 25%;
 }
 
-/* Modal Content/Box */
 .editform {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 5% auto 15% auto;
     border: 3px solid #888;
-    width: 20%; /* Could be more or less, depending on screen size */
+    width: 20%;
     height: 40%;
     align-self: center;
 }
 
+/*posts da frontpage*/
 #postlist{
     display: flex;
     background-color: white;
@@ -226,6 +222,7 @@ input[type=text], input[type=password] {
     text-decoration: underline;
 }
 
+/*mensagem flutuante ao utilizador onde diz se esta logged on nao*/
 #floatingmenu{
     background-color: var(--main-color);
     border: 0.5px solid black;
@@ -254,6 +251,7 @@ input[type=text], input[type=password] {
     display: flex;
 }
 
+/*estes .votes seguintes sao os botoes de upvote e downvote e as suas animacoes*/
 .votes_frontpage input:first-child {
     background-color: white;
     border: 2px solid #4CAF50;
@@ -359,6 +357,7 @@ input[type=text], input[type=password] {
     margin-left: 1em;
 }
 
+/*estas comment_boxs seguintes sao a cascata dos comentarios dos posts*/
 #comment_box{
     background-color: #6E7889;
     color: white;
@@ -406,7 +405,6 @@ input[type=text], input[type=password] {
     color: black;
 }
 
-
 #commentreplybox{
     display:block;
 }
@@ -416,6 +414,7 @@ input[type=text], input[type=password] {
     display: flex;
 }
 
+/*votos dos comentarios*/
 #comment_votes input:first-child {
     background-color: white;
     border: 2px solid #4CAF50;
@@ -485,10 +484,6 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
-
-
-
-
 #post_info{
     margin: auto;
 }
@@ -511,6 +506,7 @@ input[type=text], input[type=password] {
     margin-top: 0em;
 }
 
+/*os varios tipos de conteudo dos posts tem apresentacoes diferentes*/
 .post_content{
     box-sizing: content-box;
     width: auto;
@@ -541,6 +537,7 @@ input[type=text], input[type=password] {
     padding: 1em;  
 }
 
+/*rodape dos posts*/
 #post_footnote{
     text-decoration: underline;
     margin-left: 2em;
@@ -593,6 +590,7 @@ input[type=text], input[type=password] {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+/*para esconder os ids dos posts e comentarios*/
 .id, .commentid{
     visibility: hidden;
 }
@@ -678,6 +676,7 @@ input[type=text], input[type=password] {
     cursor: pointer;
     border-radius: 50%;
 }
+
 #userpost input[type="submit"], #userpost input[type="reset"] {
     margin: 1em;
     margin-top: -1em;
