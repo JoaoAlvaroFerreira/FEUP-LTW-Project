@@ -168,7 +168,7 @@ function draw_comments($postID, $fatherID, $level){ ?>
      
     
     else{
-        
+        ?> <div id = "full_comments"> <?php
     foreach($result as $row){
         
          
@@ -244,10 +244,10 @@ if(isset($_SESSION['username'])) {
   
  
 <?php        
-        }
+        }?> </div> <?php
         
     
-    }
+    } 
 }
 
 //Isto é a API do YouTube

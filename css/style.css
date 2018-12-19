@@ -355,16 +355,19 @@ input[type=text], input[type=password] {
     cursor: pointer;
 }
 
+#full_comments{
+    margin-left: 1em;
+}
+
 #comment_box{
     background-color: #6E7889;
-    margin-left: 1em;
     color: white;
     border-radius: 8px;
     color: black;
 }
 
 #comment_box2{
-    margin-left: 3em;
+    margin-left: 2em;
     background-color: beige;
     color: white;
     border-radius: 8px;
@@ -372,7 +375,7 @@ input[type=text], input[type=password] {
 }
 
 #comment_box3{
-    margin-left: 5em;
+    margin-left: 4em;
     background-color: lightblue;
     color: #D9D9DE;
     border-radius: 8px;
@@ -380,7 +383,7 @@ input[type=text], input[type=password] {
 }
 
 #comment_box4{
-    margin-left: 7em;
+    margin-left: 6em;
     background-color: #F3B54A;
     color: white;
     border-radius: 2px;
@@ -388,7 +391,7 @@ input[type=text], input[type=password] {
 }
 
 #comment_box5{
-    margin-left: 9em;
+    margin-left: 8em;
     background-color: lightcyan;
     color: white;
     border-radius: 8px;
